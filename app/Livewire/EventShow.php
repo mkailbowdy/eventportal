@@ -7,7 +7,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Title('Events')]
-class ShowEvents extends Component
+class EventShow extends Component
 {
 
     public function participate(Event $event)

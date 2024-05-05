@@ -1,14 +1,14 @@
 <?php
 
 use App\Livewire\GroupCreate;
-use App\Livewire\ShowEvents;
+use App\Livewire\EventShow;
 use Illuminate\Support\Facades\Route;
 
 //Route::view('/', 'welcome');
 
-Route::get('/', ShowEvents::class);
+Route::get('/', EventShow::class);
 
-Route::get('/groups/create', GroupCreate::class)->middleware(['auth']);
+Route::get('/groups/create', GroupCreate::class)->middleware(['auth', 'role:member']);
 
 
 Route::view('dashboard', 'dashboard')
