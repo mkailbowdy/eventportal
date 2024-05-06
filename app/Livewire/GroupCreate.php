@@ -10,17 +10,7 @@ use App\Models\Group;
 
 class GroupCreate extends Component
 {
-    #[Validate]
-    public $name = '';
-
-    #[Validate('required', message:'Yo, too short')]
-    public $description = '';
-
-    #[Validate('required', message:"Don't forget your prefecture")]
-    public $prefecture = '';
-
-    #[Validate('required', message:'Every group needs a place to call home')]
-    public $city = '';
+    
 
     public $showSuccessIndicator = false;
 
