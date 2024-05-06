@@ -1,4 +1,4 @@
-<div class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-40">
+<div class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-5">
     <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     @foreach($events as $event)
     <li wire:key="{{$event->id}}" class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">

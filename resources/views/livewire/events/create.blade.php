@@ -1,3 +1,18 @@
+<!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+
 <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-10">
     <form wire:submit="store">
         @csrf

@@ -12,8 +12,8 @@
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-    <body>
-    <x-header/>
-        {{ $slot }}
-    </body>
+<body>
+<x-header />
+    {{$slot}}
+</body>
 </html>

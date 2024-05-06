@@ -4,11 +4,12 @@ use App\Livewire\GroupCreate;
 use App\Livewire\EventShow;
 use Illuminate\Support\Facades\Route;
 
-//Route::view('/', 'welcome');
+Route::view('/', 'welcome');
 
-Route::get('/', EventShow::class);
+Route::get('/events', EventShow::class)->name('events');
+Route::get('events/create', EventShow::class)->name('events.create');
 
-Route::get('/groups/create', GroupCreate::class)->middleware(['auth', 'role:member']);
+Route::get('/groups/create', GroupCreate::class)->middleware(['auth', 'role:member'])->name('groups.create');
 
 
 Route::view('dashboard', 'dashboard')
