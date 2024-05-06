@@ -13,7 +13,9 @@
                     <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-lg font-medium text-green-700 ring-1 ring-inset ring-green-600/20">People Going: {{$event->participants}}</span>
                 </dd>
                 <dt class="sr-only">Date</dt>
-                <dd>{{ $event->start_time->format('D, M j, Y g:i A') }}</dd>
+                <dd>{{ $event->event_date->format('D, M j') }} @ {{ $event->start_time->format('H:i') }}</dd>
+                <dt class="sr-only">Date</dt>
+                <dd></dd>
             </dl>
         </div>
         <div>

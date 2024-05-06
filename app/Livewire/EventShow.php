@@ -16,6 +16,16 @@ class EventShow extends Component
         $event->update();
     }
 
+    public function store()
+    {
+        $this->form->update();
+        // sleep(). This prevents multiple submissions from accidental double clicking. Also the user can
+        // recognize that a network request was sent. If it's too fast, they might think something is wrong.
+        sleep(1);
+        $this->showSuccessIndicator = true;
+        $this->redirect('/events');
+    }
+
     public function render()
     {
         return view('livewire.events.index',[

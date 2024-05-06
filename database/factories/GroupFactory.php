@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Prefecture;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +21,7 @@ class GroupFactory extends Factory
         return [
             'name' => fake()->company,
             'description' => fake()->paragraph,
-            'prefecture' => fake()->postcode,
+            'prefecture' => $this->faker->randomElement(Prefecture::cases()),
             'city' => fake()->city,
 
         ];

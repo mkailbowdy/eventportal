@@ -16,11 +16,12 @@ return new class extends Migration
             $table->foreignId('group_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('description');
-            $table->string('city');
             $table->string('location');
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
-            $table->unsignedBigInteger('participants');
+            $table->date('event_date');
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->unsignedBigInteger('max_participants')->nullable();
+            $table->unsignedBigInteger('participants')->nullable();
             $table->timestamps();
         });
     }
