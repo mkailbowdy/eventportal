@@ -3,61 +3,23 @@
 namespace App\Livewire;
 
 
-use Illuminate\Validation\Rule;
-use Livewire\Attributes\Validate;
+use App\Livewire\Forms\CreateForm;
 use Livewire\Component;
-use App\Models\Group;
 
 class GroupCreate extends Component
 {
-    
 
+    public CreateForm $form;
     public $showSuccessIndicator = false;
-
-    public function rules()
-    {
-        return [
-            'name' => [
-                'required',
-                Rule::unique('groups', 'name')
-            ],
-            'description' => ['required'],
-            'prefecture' => ['required'],
-            'city' => ['required'],
-        ];
-    }
 
     public function store()
     {
-
-
-
-        // Let's get the attributes from the form
-//        $group = Group::create([
-//            'name' => $this->name,
-//            'description' => $this->description,
-//            'prefecture' => $this->prefecture,
-//            'city' => $this->city,
-//        ]);
-
-        // Always validate user input.
-        $validated = $this->validate();
-        $group = Group::create($validated);
-
-        // Give the user the role of 'organizer'
-        auth()->user()->removeRole('member');
-        auth()->user()->assignRole('organizer');
-
-        // Attach the user to this group. This will be in the group_user pivot table.
-        // Once a user becomes an organizer, they can no longer access /groups/create route.
-        $group->users()->attach(auth()->user()->id, ['role' => 'organizer']);
-
+        $this->form->update();
         // sleep(). This prevents multiple submissions from accidental double clicking. Also the user can
         // recognize that a network request was sent. If it's too fast, they might think something is wrong.
         sleep(1);
         $this->showSuccessIndicator = true;
-
-        $this->redirect('/');
+        $this->redirect('/events');
     }
 
     public function render()

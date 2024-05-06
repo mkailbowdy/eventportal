@@ -8,19 +8,19 @@
 
                 <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="name" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Give your group a memorable name</label>
+                        <label for="name" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Give your group a memorable name<span class="text-red-500 opacity-75" aria-hidden="true">*</span></label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
                             <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                 <input type="text"
-                                       wire:model.blur="name"
+                                       wire:model.blur="form.name"
                                        @class([
     'block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6',
-    'border border-slate-300' => $errors->missing('name'),
-    'border-2 border-red-500' => $errors->has('name'),
+    'border border-slate-300' => $errors->missing('form.name'),
+    'border-2 border-red-500' => $errors->has('form.name'),
     ])
                                 >
                             </div>
-                            @error('name')
+                            @error('form.name')
                             <small class="text-red-500">
                                 <em>
                                     {{$message}}
@@ -31,16 +31,16 @@
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="description" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Tell everyone what your group is about</label>
+                        <label for="description" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Tell everyone what your group is about<span class="text-red-500 opacity-75" aria-hidden="true">*</span></label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <textarea wire:model.blur="description" rows="3"
+                            <textarea wire:model.blur="form.description" rows="3"
                                       @class([
     'block w-full max-w-2xl rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
-    'border border-slate-300' => $errors->missing('description'),
-    'border-2 border-red-500' => $errors->has('description'),
+    'border border-slate-300' => $errors->missing('form.description'),
+    'border-2 border-red-500' => $errors->has('form.description'),
 ])
                                       ></textarea>
-                            @error('description')
+                            @error('form.description')
                             <small class="text-red-500">
                                 <em>
                                     {{$message}}
@@ -63,20 +63,20 @@
 {{--                    </div>--}}
                     <div class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                            <label for="prefecture" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Prefecture</label>
+                            <label for="prefecture" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Prefecture<span class="text-red-500 opacity-75" aria-hidden="true">*</span></label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                <select wire:model="prefecture"
+                                <select wire:model="form.prefecture"
                                 >
                                     <option value="" @class([
-    'border border-slate-300' => $errors->missing('prefecture'),
-    'border-2 border-red-500' => $errors->has('prefecture'),
+    'border border-slate-300' => $errors->missing('form.prefecture'),
+    'border-2 border-red-500' => $errors->has('form.prefecture'),
     ])
-                                    >Select a prefecture</option>
-                                    @foreach (['Hokkaido', 'Aomori', 'Iwate', 'Miyagi', 'Akita', 'Yamagata', 'Fukushima', 'Ibaraki', 'Tochigi', 'Gunma', 'Saitama', 'Chiba', 'Tokyo', 'Kanagawa', 'Niigata', 'Toyama', 'Ishikawa', 'Fukui', 'Yamanashi', 'Nagano', 'Gifu', 'Shizuoka', 'Aichi', 'Mie', 'Shiga', 'Kyoto', 'Osaka', 'Hyogo', 'Nara', 'Wakayama', 'Tottori', 'Shimane', 'Okayama', 'Hiroshima', 'Yamaguchi', 'Tokushima', 'Kagawa', 'Ehime', 'Kochi', 'Fukuoka', 'Saga', 'Nagasaki', 'Kumamoto', 'Oita', 'Miyazaki', 'Kagoshima', 'Okinawa'] as $prefecture)
-                                        <option value="{{ $prefecture }}" {{ old('prefecture') == $prefecture ? 'selected' : '' }}>{{ $prefecture }}</option>
+                                    >Choose a prefecture</option>
+                                    @foreach(App\Enums\Prefecture::cases() as $prefecture)
+                                        <option value="{{$prefecture->value}}">{{$prefecture->label()}}</option>
                                     @endforeach
                                 </select>
-                                    @error('prefecture')
+                                    @error('form.prefecture')
                                 <small class="text-red-500">
                                     <em>
                                         {{$message}}
@@ -86,16 +86,16 @@
                             </div>
                         </div>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                            <label for="city" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">City</label>
+                            <label for="city" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">City<span class="text-red-500 opacity-75" aria-hidden="true">*</span></label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                <input type="text" wire:model.blur="city" autocomplete="city"
+                                <input type="text" wire:model.blur="form.city" autocomplete="city"
                                        @class([
     'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6',
-    'border border-slate-300' => $errors->missing('city'),
-    'border-2 border-red-500' => $errors->has('city'),
+    'border border-slate-300' => $errors->missing('form.city'),
+    'border-2 border-red-500' => $errors->has('form.city'),
     ])
                                        >
-                                @error('city')
+                                @error('form.city')
                                 <small class="text-red-500">
                                     <em>
                                         {{$message}}
