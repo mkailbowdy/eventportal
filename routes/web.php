@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome');
 
 Route::get('/events', EventShow::class)->name('events');
-Route::get('/events/create', EventCreate::class)->name('events.create');
+Route::get('/events/create', EventCreate::class)->middleware(['auth', 'role:organizer'])->name('events.create');
 
 Route::get('/groups/create', GroupCreate::class)->middleware(['auth', 'role:member'])->name('groups.create');
 
