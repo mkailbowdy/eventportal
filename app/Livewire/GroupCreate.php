@@ -3,13 +3,13 @@
 namespace App\Livewire;
 
 
-use App\Livewire\Forms\CreateForm;
+use App\Livewire\Forms\GroupForm;
 use Livewire\Component;
 
 class GroupCreate extends Component
 {
 
-    public CreateForm $form;
+    public GroupForm $form;
     public $showSuccessIndicator = false;
 
     public function store()
@@ -24,6 +24,6 @@ class GroupCreate extends Component
 
     public function render()
     {
-        return view('livewire.groups.create');
+        return view('livewire.groups.group-create');
     }
 }

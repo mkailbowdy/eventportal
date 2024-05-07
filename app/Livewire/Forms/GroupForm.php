@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Forms;
 
+use App\Enums\Prefecture;
 use App\Models\Group;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
-use App\Enums\Prefecture;
 
-class CreateForm extends Form
+class GroupForm extends Form
 {
     #[Validate]
     public $name = '';

@@ -16,24 +16,14 @@ class EventForm extends Form
     public $description = '';
     #[Validate]
     public $location = '';
+
     public $event_date;
     public $start_time;
     public $end_time;
     public $max_participants;
     public $participants;
     public $group_id;
-
-    public function assignGroupId()
-    {
-        $user = Auth::user(); // Get the currently authenticated user
-        $group = $user->groups()->wherePivot('role', 'organizer')->first(); // Get the first matching group
-
-        if ($group) {
-            $this->group_id = $group->pivot->group_id;
-        } else {
-            dd('Must be an Organizer Please sign up.');
-        }
-    }
+    public Event $event;
 
     public function rules()
     {
@@ -53,15 +43,32 @@ class EventForm extends Form
         $this->assignGroupId();  // Ensure the group ID is assigned
 
         // If it's a new event with no participants, set participants to 1, which is the Organizer.
-        if (! $this->participants)
-        {
+        if (!$this->participants) {
             $this->participants = 1;
         }
         // Always validate user input.
         $this->validate();
 
         // Include the group_id in the array passed to the create method
-        Event::create($this->all());
+        $this->event = Event::create($this->all());
 
+
+    }
+
+    public function assignGroupId()
+    {
+        $user = Auth::user(); // Get the currently authenticated user
+        $group = $user->groups()->wherePivot('role', 'organizer')->first(); // Get the first matching group
+
+        if ($group) {
+            $this->group_id = $group->pivot->group_id;
+        } else {
+            dd('Must be an Organizer Please sign up.');
+        }
+    }
+
+    public function getEventId()
+    {
+        return $this->event->id;
     }
 }

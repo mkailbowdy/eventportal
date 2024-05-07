@@ -13,16 +13,16 @@ class EventCreate extends Component
     public function save()
     {
         $this->form->store();
+        session()->flash('status', 'Event successfully posted!');
 
         sleep(1); // simulate a delay, although it's better to handle this differently
         $this->showSuccessIndicator = true;
 
-        $this->redirectRoute('events');
-
+        $this->redirect('/events/'.$this->form->getEventId());
     }
 
     public function render()
     {
-        return view('livewire.events.create');
+        return view('livewire.events.event-create');
     }
 }
