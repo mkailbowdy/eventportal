@@ -1,8 +1,14 @@
 <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-6">
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Create Event') }}
+        </h2>
+    </x-slot>
     <form wire:submit="save">
         <div class="space-y-12 sm:space-y-16">
             <div>
-                <h2 class="text-base font-semibold leading-7 text-gray-900">Create an Event</h2>
+                <h2 class="text-base font-semibold leading-7 text-gray-900">Remember to give all the details of your
+                    event!</h2>
                 <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-600">Please review our community guidelines</p>
 
                 <div
@@ -73,7 +79,6 @@
                             </small>
                             @enderror
                         </div>
-
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -190,7 +195,6 @@
                     </svg>
                 </div>
             </button>
-            {{--        <button type="submit" class="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>--}}
         </div>
 
     </form>
