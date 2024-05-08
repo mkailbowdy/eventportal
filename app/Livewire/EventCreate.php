@@ -10,9 +10,9 @@ class EventCreate extends Component
     public EventForm $form;
     public $showSuccessIndicator = false;
 
-    public function save()
+    public function store()
     {
-        $this->form->store();
+        $this->form->update();
         session()->flash('status', 'Event successfully posted!');
 
         sleep(1); // simulate a delay, although it's better to handle this differently

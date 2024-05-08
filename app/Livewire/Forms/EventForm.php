@@ -38,7 +38,7 @@ class EventForm extends Form
         ];
     }
 
-    public function store()
+    public function update()
     {
         $this->assignGroupId();  // Ensure the group ID is assigned
 
@@ -52,7 +52,8 @@ class EventForm extends Form
         // Include the group_id in the array passed to the create method
         $this->event = Event::create($this->all());
 
-
+        // Ofcourse the host will participate, so participation_status is set to true by default here.
+        $this->event->users()->attach(auth()->user()->id, ['participation_status' => true]);
     }
 
     public function assignGroupId()

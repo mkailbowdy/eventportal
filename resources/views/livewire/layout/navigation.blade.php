@@ -43,7 +43,6 @@ new class extends Component {
                         {{ __('Create a Group') }}
                     </x-nav-link>
                     @endrole
-
                 </div>
             </div>
 

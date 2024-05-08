@@ -35,6 +35,18 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function events()
+    {
+        return $this->belongsToMany(Event::class, 'event_user')
+            ->withPivot(['participation_status']);
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'group_user')
+            ->withPivot(['role']);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -46,15 +58,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-    public function events()
-    {
-        return $this->belongsToMany(Event::class);
-    }
-
-    public function groups()
-    {
-        return $this->belongsToMany(Group::class, 'group_user')
-            ->withPivot(['role']);
     }
 }

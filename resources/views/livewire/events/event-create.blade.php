@@ -4,7 +4,7 @@
             {{ __('Create Event') }}
         </h2>
     </x-slot>
-    <form wire:submit="save">
+    <form wire:submit="store">
         <div class="space-y-12 sm:space-y-16">
             <div>
                 <h2 class="text-base font-semibold leading-7 text-gray-900">Remember to give all the details of your

@@ -1,11 +1,3 @@
-<!--
-  This example requires updating your template:
-
-  ```
-  <html class="h-full bg-gray-100">
-  <body class="h-full">
-  ```
--->
 <div class="min-h-full">
     <div class="py-10">
         <x-slot name="header">
@@ -26,7 +18,7 @@
         </x-slot>
         <main>
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <!-- Your content -->
+                <button type="submit" wire:click="goingOrNot">Join</button>
             </div>
         </main>
     </div>

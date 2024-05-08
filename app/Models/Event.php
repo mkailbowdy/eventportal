@@ -9,7 +9,10 @@ class Event extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'location', 'event_date', 'start_time', 'end_time', 'max_participants', 'group_id', 'participants'];
+    protected $fillable = [
+        'title', 'description', 'location', 'event_date', 'start_time', 'end_time', 'max_participants', 'group_id',
+        'participants'
+    ];
 
     protected $casts = [
         'event_date' => 'date',
@@ -19,7 +22,9 @@ class Event extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        // if we dont add withPivot, we can only get the user_id and event_id, but not participation
+        return $this->belongsToMany(User::class)
+            ->withPivot(['participation_status']);
     }
 
     public function group()

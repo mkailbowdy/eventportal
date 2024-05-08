@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\Event;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,10 +14,10 @@ return new class extends Migration
     {
         Schema::create('event_user', function (Blueprint $table) {
             $table->primary(['event_id', 'user_id']);
-            $table->boolean('participationStatus')->default(false);
+            $table->boolean('participation_status')->default(false);
 
-            $table->foreignIdFor(\App\Models\User::class, 'user_id');
-            $table->foreignIdFor(\App\Models\Event::class, 'event_id');
+            $table->foreignIdFor(User::class, 'user_id');
+            $table->foreignIdFor(Event::class, 'event_id');
             $table->timestamps();
         });
     }
