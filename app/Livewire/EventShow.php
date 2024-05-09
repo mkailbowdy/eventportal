@@ -41,6 +41,7 @@ class EventShow extends Component
 
         // Refresh local status based on updated database entry
         $this->isGoing = $newStatus;
+
     }
 
     public function render()

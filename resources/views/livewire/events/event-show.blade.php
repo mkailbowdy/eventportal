@@ -25,13 +25,13 @@
             @endguest
             @auth
                 <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <x-primary-button type="button" wire:click="goingOrNot">
-                        @if($isGoing)
-                            Changed my mind...
-                        @else
-                            Join!
-                        @endif
-                    </x-primary-button>
+                    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8" x-data="{ isGoing: @entangle('isGoing') }">
+                        <button @click="isGoing = !isGoing; $wire.goingOrNot()"
+                                :class="isGoing ? 'bg-red-500 hover:bg-red-700' : 'bg-gray-800 hover:bg-gray-700'"
+                                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest transition ease-in-out duration-150">
+                            <span x-text="isGoing ? 'Not Going' : 'Join'"></span>
+                        </button>
+                    </div>
                 </div>
             @endauth
         </main>
