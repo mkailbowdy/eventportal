@@ -6,7 +6,7 @@ use App\Livewire\EventShow;
 use App\Livewire\GroupCreate;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome');
+Route::view('/', 'welcome')->middleware('guest');
 
 Route::get('/events', EventIndex::class)->name('events.index');
 Route::get('/events/create', EventCreate::class)->middleware(['auth', 'role:organizer'])->name('events.create');
