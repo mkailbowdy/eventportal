@@ -20,7 +20,12 @@ class EventShow extends Component
     {
         $user = auth()->user();
         if ($user) {
-            $this->isGoing = $this->event->users()->where('users.id', $user->id)->exists();
+            // Ensure we are getting the pivot data including participation status
+            $participant = $this->event->users()
+                ->where('users.id', $user->id)
+                ->first();
+
+            $this->isGoing = $participant ? $participant->pivot->participation_status : false;
         }
     }
 
@@ -28,11 +33,13 @@ class EventShow extends Component
     {
         $userId = auth()->id();
         $this->event->users()->syncWithoutDetaching([$userId]);
-        $pivot = $this->event->users()->where('users.id', $userId)->first()->pivot;
-        $newStatus = !$pivot->participation_status;
+        $participant = $this->event->users()->where('users.id', $userId)->first();
+
+        // Toggle the participation status
+        $newStatus = !$participant || !$participant->pivot->participation_status;
         $this->event->users()->updateExistingPivot($userId, ['participation_status' => $newStatus]);
 
-        // Update local status after participation status change
+        // Refresh local status based on updated database entry
         $this->isGoing = $newStatus;
     }
 

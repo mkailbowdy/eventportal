@@ -27,9 +27,9 @@
                 <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <x-primary-button type="button" wire:click="goingOrNot">
                         @if($isGoing)
-                            Not Going
+                            Changed my mind...
                         @else
-                            Join
+                            Join!
                         @endif
                     </x-primary-button>
                 </div>
