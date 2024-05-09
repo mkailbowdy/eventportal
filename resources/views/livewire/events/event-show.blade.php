@@ -25,7 +25,13 @@
             @endguest
             @auth
                 <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <x-primary-button type="submit" wire:click="goingOrNot">Join</x-primary-button>
+                    <x-primary-button type="button" wire:click="goingOrNot">
+                        @if($isGoing)
+                            Not Going
+                        @else
+                            Join
+                        @endif
+                    </x-primary-button>
                 </div>
             @endauth
         </main>
