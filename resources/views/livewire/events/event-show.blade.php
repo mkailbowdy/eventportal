@@ -17,6 +17,7 @@
 
         </x-slot>
         <main>
+            <img src="{{ asset('storage/' . $event->photo_path) }}" alt="Event Photo">
             @guest
                 <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <a href="/login"

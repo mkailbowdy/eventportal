@@ -149,6 +149,19 @@
                         </div>
                     </div>
 
+                    {{--                    EVENT
+
+
+
+
+
+
+
+
+
+
+
+                    IMAGES--}}
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Event
@@ -164,10 +177,15 @@
                                               clip-rule="evenodd"/>
                                     </svg>
                                     <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                                        <label for="file-upload"
+                                        <label for="file_upload"
                                                class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                                             <span>Upload a file</span>
-                                            <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                                            @if ($file_upload)
+                                                <img src="{{ $file_upload->temporaryUrl() }}">
+                                            @endif
+                                            <input wire:model="file_upload" id="file_upload" name="file_upload"
+                                                   type="file" class="sr-only">
+                                            @error('file_upload') <span class="error">{{ $message }}</span> @enderror
                                         </label>
                                         <p class="pl-1">or drag and drop</p>
                                     </div>

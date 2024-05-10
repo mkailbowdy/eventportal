@@ -11,7 +11,7 @@ class Event extends Model
 
     protected $fillable = [
         'title', 'description', 'location', 'event_date', 'start_time', 'end_time', 'max_participants', 'group_id',
-        'participants'
+        'participants', 'photo_path'
     ];
 
     protected $casts = [
