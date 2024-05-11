@@ -1,5 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
+import aspectRatio from '@tailwindcss/aspect-ratio'; // Import the aspect-ratio plugin
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -19,6 +20,9 @@ export default {
 
     plugins: [
         forms,
+        aspectRatio,
+
     ],
+
 
 };

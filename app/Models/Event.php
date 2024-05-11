@@ -15,7 +15,7 @@ class Event extends Model
     ];
 
     protected $casts = [
-        'event_date' => 'date',
+        'event_date' => 'datetime',
         'start_time' => 'datetime',
         'end_time' => 'datetime',
     ];

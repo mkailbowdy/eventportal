@@ -79,6 +79,7 @@
                             <button type="button"
                                     href="tel:+1-202-555-0170"
                                     wire:click="participate({{$event->id}})"
+                                    wire:navigate
                                     class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
                                 <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
                                      aria-hidden="true">
