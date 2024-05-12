@@ -18,6 +18,7 @@ class GroupCreate extends Component
     #[Validate('image|max:20480')] // 20MB Max
     public $photo;
 
+
     public function store()
     {
         $this->form->update();
