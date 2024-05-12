@@ -15,8 +15,10 @@
                 {{'Dummy Name'}}
             @endif
 
+
         </x-slot>
         <main>
+
             <!--
   This example requires some changes to your config:
 
@@ -90,6 +92,7 @@
                                                 </button>
                                             </div>
                                         @endauth
+
                                     </dd>
                                 </div>
                             </dl>

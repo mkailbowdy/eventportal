@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\Prefecture;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -12,11 +11,7 @@ class Group extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'prefecture', 'city'];
-
-    protected $casts = [
-        'prefecture' => Prefecture::class,
-    ];
+    protected $fillable = ['name', 'description', 'prefecture', 'city', 'photo_path'];
 
 
     public function events(): HasMany

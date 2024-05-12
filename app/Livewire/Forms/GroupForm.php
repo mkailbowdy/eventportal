@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Forms;
 
-use App\Enums\Prefecture;
 use App\Models\Group;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
@@ -12,14 +11,13 @@ class GroupForm extends Form
 {
     #[Validate]
     public $name = '';
-
     #[Validate]
     public $description = '';
-
     #[Validate]
     public $city = '';
-
-    public Prefecture $prefecture;
+    #[Validate]
+    public $prefecture = '';
+    public Group $group;
 
     public function rules()
     {
@@ -37,8 +35,8 @@ class GroupForm extends Form
     public function update()
     {
         // Always validate user input.
-        $validated = $this->validate();
-        $group = Group::create($validated);
+        $this->validate();
+        $this->group = Group::create($this->all());
 
         // Give the user the role of 'organizer'
         auth()->user()->removeRole('member');
@@ -61,6 +59,6 @@ class GroupForm extends Form
                             4. ['role' => 'organizer']
                             This array is the second argument to the attach() method. It specifies additional data to be stored in the pivot table.
                             In this case, it's setting the role column of the pivot table to 'organizer'. This might be used to store different roles or permissions that users have within a group.*/
-        $group->users()->attach(auth()->user()->id, ['role' => 'organizer']);
+        $this->group->users()->attach(auth()->user()->id, ['role' => 'organizer']);
     }
 }

@@ -42,7 +42,7 @@
                 <div class="flex flex-1 flex-col p-8">
                     <a href="/events/{{$event->id}}">
                         <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
-                             src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+                             src="{{ asset('storage/' . $event->group->photo_path) }}"
                              alt="">
                     </a>
                     <h3 class="mt-6 text-sm font-medium text-gray-900">{{$event->title}}</h3>

@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('max_participants')->nullable();
             $table->unsignedBigInteger('participants')->nullable();
             $table->string('photo_path')->nullable();
+            $table->string('gallery_path')->nullable();
             $table->timestamps();
         });
     }
