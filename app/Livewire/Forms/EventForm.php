@@ -9,6 +9,7 @@ use Livewire\Form;
 
 class EventForm extends Form
 {
+    public Event $event;
     // To add the real time validation, we still need the #[Validate] even though we used rules()
     #[Validate]
     public $title = '';
@@ -23,7 +24,7 @@ class EventForm extends Form
     public $max_participants;
     public $participants;
     public $group_id;
-    public Event $event;
+
 
     public function rules()
     {
