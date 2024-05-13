@@ -4,7 +4,7 @@
             {{ __('Edit Event') }}
         </h2>
     </x-slot>
-    <form wire:submit="store">
+    <form wire:submit="save">
         <div class="space-y-12 sm:space-y-16">
             <div>
                 <h2 class="text-base font-semibold leading-7 text-gray-900">Remember to give all the details of your
@@ -19,9 +19,8 @@
                             <div
                                 class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                 <input type="text" name="form.title" id="form.title" autocomplete="form.title"
-                                       wire:model.blur='{{$title}}'
+                                       wire:model.blur='form.title'
                                        placeholder="e.g. English and Japanese Cultural Exchange"
-                                       value="{{$title}}"
                                     @class([
             'block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6',
             'border border-slate-300' => $errors->missing('form.title'),
@@ -43,12 +42,12 @@
                                class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Description</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
                         <textarea id="form.description" name="form.description" rows="3"
-                                  wire:model.blur="{{$description}}"
+                                  wire:model.blur="form.description"
                                   @class([
         'block w-full max-w-2xl rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
         'border border-slate-300' => $errors->missing('form.description'),
         'border-2 border-red-500' => $errors->has('form.description'),
-        ])>{{$description}}</textarea>
+        ])></textarea>
                             @error('form.description')
                             <small class="text-red-500">
                                 <em>
@@ -66,8 +65,7 @@
                                class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Location</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
                             <input type="text" name="form.location" id="form.location" autocomplete="form.location"
-                                   wire:model.blur="{{$location}}"
-                                   value="{{$location}}"
+                                   wire:model.blur="form.location"
                                 @class([
          'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xl sm:text-sm sm:leading-6',
          'border border-slate-300' => $errors->missing('form.location'),
@@ -87,9 +85,8 @@
                         <label for="form.max_participants"
                                class=" text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Capacity</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <input wire:model="{{$max_participants}}" type="number" name="form.max_participants"
+                            <input wire:model="form.max_participants" type="number" name="form.max_participants"
                                    id="form.max_participants" autocomplete="form.max_participants" min="1"
-                                   value="{{$max_participants}}"
                                 @class([
          'block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xl sm:text-sm sm:leading-6',
          'border border-slate-300' => $errors->missing('form.max_participants'),
@@ -110,8 +107,7 @@
                         <label for="form.event_date"
                                class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Event Date</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <input wire:model="{{$event_date}}"
-                                   value="{{$event_date}}"
+                            <input wire:model="form.event_date"
                                    type="date" id="form.event_date" name="form.event_date"
                                    min="{{ now()->toDateString() }}">
                             @error('form.event_date')
@@ -128,8 +124,7 @@
                         <label for="form.start_time"
                                class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Start Time</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <input wire:model="{{$start_time}}" type="time" id="form.start_time" name="form.start_time"
-                                   value="{{$start_time}}">
+                            <input wire:model="form.start_time" type="time" id="form.start_time" name="form.start_time">
                             @error('form.start_time')
                             <small class="text-red-500">
                                 <em>
@@ -144,8 +139,7 @@
                         <label for="form.end_time" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">End
                             Time</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <input wire:model="{{$end_time}}" type="time" id="form.end_time" name="form.end_time"
-                                   value="{{$end_time}}">
+                            <input wire:model="form.end_time" type="time" id="form.end_time" name="form.end_time">
                             @error('form.end_time')
                             <small class="text-red-500">
                                 <em>
@@ -188,12 +182,14 @@
                                         <label for="file_upload"
                                                class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                                             <span>Upload a file</span>
+
                                             @if ($file_upload)
                                                 <img src="{{ $file_upload->temporaryUrl() }}">
                                             @endif
-                                            <input wire:model="{{$photo_path}}" id="file_upload" name="file_upload"
-                                                   type="file" class="sr-only"
-                                                   value="{{$photo_path}}">
+
+
+                                            <input wire:model="file_upload" id="file_upload" name="file_upload"
+                                                   type="file" class="sr-only">
                                             @error('file_upload') <span class="error">{{ $message }}</span> @enderror
                                         </label>
                                         <p class="pl-1">or drag and drop</p>
@@ -203,7 +199,7 @@
                             </div>
                             <div
                                 class="aspect-h-2 aspect-w-3 overflow-hidden sm:aspect-w-5 lg:aspect-none lg:absolute lg:h-full lg:w-1/2 lg:pr-4 xl:pr-16">
-                                <img src="{{ asset('storage/' . $event->photo_path) }}" alt="Event Photo"
+                                <img src="{{ asset('storage/' . $form->event->photo_path) }}" alt="Event Photo"
                                      class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                             </div>
                         </div>

@@ -9,11 +9,13 @@ class EventShow extends Component
 {
     public Event $event;
     public $isGoing; // Property to track if the user is going or not
+    public $organizer;
 
     public function mount(Event $event)
     {
         $this->event = $event;
         $this->checkParticipation();
+        $this->organizer = $this->event->group->users()->wherePivot('role', 'organizer')->first();
     }
 
     private function checkParticipation()

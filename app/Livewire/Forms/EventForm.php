@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Forms;
 
+use AllowDynamicProperties;
 use App\Models\Event;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
-class EventForm extends Form
+#[AllowDynamicProperties] class EventForm extends Form
 {
     public Event $event;
     // To add the real time validation, we still need the #[Validate] even though we used rules()
@@ -23,8 +23,7 @@ class EventForm extends Form
     public $end_time;
     public $max_participants;
     public $participants;
-    public $group_id;
-
+    public $photo_path;
 
     public function rules()
     {
@@ -39,9 +38,23 @@ class EventForm extends Form
         ];
     }
 
+    public function setEvent(Event $event)
+    {
+        $this->event = $event;
+
+        $this->title = $this->event->title;
+        $this->description = $this->event->description;
+        $this->location = $this->event->location;
+        $this->max_participants = $this->event->max_participants;
+        $this->event_date = $this->event->event_date->format('Y-m-d');
+        $this->start_time = $this->event->start_time->format('H:i');
+        $this->end_time = $this->event->end_time->format('H:i');
+        $this->photo_path = $this->event->photo_path;
+
+    }
+
     public function update()
     {
-        $this->assignGroupId();  // Ensure the group ID is assigned
 
         // If it's a new event with no participants, set participants to 1, which is the Organizer.
         if (!$this->participants) {
@@ -50,27 +63,15 @@ class EventForm extends Form
         // Always validate user input.
         $this->validate();
 
-        // Include the group_id in the array passed to the create method
-        $this->event = Event::create($this->all());
+        $this->event->title = $this->title;
+        $this->event->description = $this->description;
+        $this->event->location = $this->location;
+        $this->event->max_participants = $this->max_participants;
+        $this->event->event_date = $this->event_date;
+        $this->event->start_time = $this->start_time;
+        $this->event->end_time = $this->end_time;
+        $this->event->photo_path = $this->photo_path;
 
-        // Ofcourse the host will participate, so participation_status is set to true by default here.
-        $this->event->users()->attach(auth()->user()->id, ['participation_status' => true]);
-    }
-
-    public function assignGroupId()
-    {
-        $user = Auth::user(); // Get the currently authenticated user
-        $group = $user->groups()->wherePivot('role', 'organizer')->first(); // Get the first matching group
-
-        if ($group) {
-            $this->group_id = $group->pivot->group_id;
-        } else {
-            dd('Must be an Organizer Please sign up.');
-        }
-    }
-
-    public function getEventId()
-    {
-        return $this->event->id;
+        $this->event->save();
     }
 }

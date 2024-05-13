@@ -1,19 +1,10 @@
 <div class="min-h-full">
     <div class="py-10">
-        {{--        <x-slot name="header">--}}
-        {{--            <h2 class="font-semibold text-xl text-gray-800 leading-tight">--}}
-        {{--                {{$event->title}}--}}
-        {{--            </h2>--}}
-        {{--            @php--}}
-        {{--                $organizer = $event->group->users()->wherePivot('role', 'organizer')->first();--}}
-        {{--            @endphp--}}
-
-        {{--            @if($organizer)--}}
-        {{--                {{ $event->group->name }}--}}
-        {{--            @else--}}
-        {{--                {{'Dummy Name'}}--}}
-        {{--            @endif--}}
-        {{--        </x-slot>--}}
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{$event->title}}
+            </h2>
+        </x-slot>
         <main>
             <div class="bg-white">
                 <section aria-labelledby="features-heading" class="relative">
@@ -32,11 +23,14 @@
                             </a>
                             <h2 id="features-heading" class="text-center font-medium text-gray-500">Hosted
                                 by {{$event->group->name}}</h2>
-                            <div class="mx-auto">
-                                <a href="{{ route('events.edit', ['event' => $event->id]) }}"
-                                   class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white bg-gray-800 hover:bg-gray-700 uppercase tracking-widest transition ease-in-out duration-150">Edit
-                                    Event</a>
-                            </div>
+                            @if(auth()->user()->id === $organizer->id)
+                                <div class="mx-auto">
+                                    <a href="{{ route('events.edit', ['event' => $event->id]) }}"
+                                       class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white bg-gray-800 hover:bg-gray-700 uppercase tracking-widest transition ease-in-out duration-150">
+                                        Edit Event
+                                    </a>
+                                </div>
+                            @endif
                             <p class="mt-4 text-4xl font-bold tracking-tight text-gray-900">{{$event->title}}</p>
                             <p class="mt-4 text-gray-500">{{$event->description}}</p>
 
