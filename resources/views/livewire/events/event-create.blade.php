@@ -14,21 +14,21 @@
                 <div
                     class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="title"
+                        <label for="form.title"
                                class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Title</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
                             <div
                                 class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                <input type="text" name="title" id="title" autocomplete="title"
-                                       wire:model.blur='title'
+                                <input type="text" name="form.title" id="form.title" autocomplete="form.title"
+                                       wire:model.blur='form.title'
                                        placeholder="e.g. English and Japanese Cultural Exchange"
                                     @class([
             'block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6',
-            'border border-slate-300' => $errors->missing('title'),
-            'border-2 border-red-500' => $errors->has('title'),
+            'border border-slate-300' => $errors->missing('form.title'),
+            'border-2 border-red-500' => $errors->has('form.title'),
             ])>
                             </div>
-                            @error('title')
+                            @error('form.title')
                             <small class="text-red-500">
                                 <em>
                                     {{$message}}
@@ -42,14 +42,14 @@
                         <label for="form.description"
                                class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Description</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
-                        <textarea id="description" name="description" rows="3"
-                                  wire:model.blur="description"
+                        <textarea id="form.description" name="form.description" rows="3"
+                                  wire:model.blur="form.description"
                                   @class([
         'block w-full max-w-2xl rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
-        'border border-slate-300' => $errors->missing('description'),
-        'border-2 border-red-500' => $errors->has('description'),
+        'border border-slate-300' => $errors->missing('form.description'),
+        'border-2 border-red-500' => $errors->has('form.description'),
         ])></textarea>
-                            @error('description')
+                            @error('form.description')
                             <small class="text-red-500">
                                 <em>
                                     {{$message}}
@@ -62,17 +62,17 @@
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="location"
+                        <label for="form.location"
                                class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Location</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <input type="text" name="location" id="location" autocomplete="location"
-                                   wire:model.blur="location"
+                            <input type="text" name="form.location" id="form.location" autocomplete="form.location"
+                                   wire:model.blur="form.location"
                                 @class([
          'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xl sm:text-sm sm:leading-6',
-         'border border-slate-300' => $errors->missing('location'),
-         'border-2 border-red-500' => $errors->has('location'),
+         'border border-slate-300' => $errors->missing('form.location'),
+         'border-2 border-red-500' => $errors->has('form.location'),
          ])>
-                            @error('location')
+                            @error('form.location')
                             <small class="text-red-500">
                                 <em>
                                     {{$message}}
@@ -83,18 +83,18 @@
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="max_participants"
+                        <label for="form.max_participants"
                                class=" text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Capacity</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <input wire:model="max_participants" type="number" name="max_participants"
-                                   id="max_participants" autocomplete="max_participants" min="1"
+                            <input wire:model="form.max_participants" type="number" name="form.max_participants"
+                                   id="form.max_participants" autocomplete="form.max_participants" min="1"
                                 @class([
          'block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xl sm:text-sm sm:leading-6',
-         'border border-slate-300' => $errors->missing('max_participants'),
-         'border-2 border-red-500' => $errors->has('max_participants'),
+         'border border-slate-300' => $errors->missing('form.max_participants'),
+         'border-2 border-red-500' => $errors->has('form.max_participants'),
          ])
                             >
-                            @error('max_participants')
+                            @error('form.max_participants')
                             <small class="text-red-500">
                                 <em>
                                     {{$message}}
@@ -105,12 +105,12 @@
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="event_date"
+                        <label for="form.event_date"
                                class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Event Date</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <input wire:model="event_date" type="date" id="event_date" name="event_date"
+                            <input wire:model="form.event_date" type="date" id="form.event_date" name="form.event_date"
                                    min="{{ now()->toDateString() }}">
-                            @error('event_date')
+                            @error('form.event_date')
                             <small class="text-red-500">
                                 <em>
                                     {{$message}}
@@ -121,11 +121,11 @@
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="start_time"
+                        <label for="form.start_time"
                                class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Start Time</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <input wire:model="start_time" type="time" id="start_time" name="start_time">
-                            @error('start_time')
+                            <input wire:model="form.start_time" type="time" id="form.start_time" name="form.start_time">
+                            @error('form.start_time')
                             <small class="text-red-500">
                                 <em>
                                     {{$message}}
@@ -136,11 +136,11 @@
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="end_time" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">End
+                        <label for="form.end_time" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">End
                             Time</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <input wire:model="end_time" type="time" id="end_time" name="end_time">
-                            @error('end_time')
+                            <input wire:model="form.end_time" type="time" id="form.end_time" name="form.end_time">
+                            @error('form.end_time')
                             <small class="text-red-500">
                                 <em>
                                     {{$message}}

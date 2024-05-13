@@ -2,14 +2,13 @@
 
 namespace App\Livewire\Forms;
 
-use AllowDynamicProperties;
 use App\Models\Event;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
-#[AllowDynamicProperties] class EventForm extends Form
+class EventForm extends Form
 {
-    public Event $event;
+    public ?Event $event;
     // To add the real time validation, we still need the #[Validate] even though we used rules()
     #[Validate]
     public $title = '';
@@ -22,8 +21,8 @@ use Livewire\Form;
     public $start_time;
     public $end_time;
     public $max_participants;
-    public $participants;
-    public $photo_path;
+    public $photo_path = '';
+    public int $group_id = 1;
 
     public function rules()
     {
@@ -53,13 +52,16 @@ use Livewire\Form;
 
     }
 
+    public function store()
+    {
+        $this->validate();
+        $this->event = Event::create($this->all());
+
+    }
+
     public function update()
     {
 
-        // If it's a new event with no participants, set participants to 1, which is the Organizer.
-        if (!$this->participants) {
-            $this->participants = 1;
-        }
         // Always validate user input.
         $this->validate();
 
@@ -74,4 +76,5 @@ use Livewire\Form;
 
         $this->event->save();
     }
+
 }

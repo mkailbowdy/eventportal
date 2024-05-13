@@ -23,7 +23,12 @@
                             </a>
                             <h2 id="features-heading" class="text-center font-medium text-gray-500">Hosted
                                 by {{$event->group->name}}</h2>
-                            @if(auth()->user()->id === $organizer->id)
+                            <p class="mt-4 text-4xl font-bold tracking-tight text-gray-900">{{$event->title}}</p>
+                            <p class="mt-4 text-gray-500">{{$event->description}}</p>
+
+                            {{--                            Need to check if $organizer is not null AND auth()->id() === $organizer->id because--}}
+                            {{--                            We need to check if an object is not null before we can access properties or methods of that object --}}
+                            @if($organizer && auth()->id() === $organizer->id)
                                 <div class="mx-auto">
                                     <a href="{{ route('events.edit', ['event' => $event->id]) }}"
                                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white bg-gray-800 hover:bg-gray-700 uppercase tracking-widest transition ease-in-out duration-150">
@@ -31,8 +36,6 @@
                                     </a>
                                 </div>
                             @endif
-                            <p class="mt-4 text-4xl font-bold tracking-tight text-gray-900">{{$event->title}}</p>
-                            <p class="mt-4 text-gray-500">{{$event->description}}</p>
 
                             <dl class="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 text-sm sm:grid-cols-2">
                                 <div>

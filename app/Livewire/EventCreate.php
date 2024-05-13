@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\Event;
+use App\Livewire\Forms\EventForm;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -11,41 +11,32 @@ class EventCreate extends Component
 {
     use WithFileUploads;
 
+    public EventForm $form;
+
     public $showSuccessIndicator = false;
 
-    public Event $event;
     public $group_id;
-    public $title = '';
-    public $description = '';
-    public $location = '';
-    public $event_date;
-    public $start_time;
-    public $end_time;
-    public $max_participants;
-    public $photo_path = '';
 
     #[Validate('image|max:20480')] // 20MB Max
     public $file_upload;
 
     public function save()
     {
-        $this->event = Event::create([
-            'group_id' => auth()->user()->groups()->wherePivot('role', 'organizer')->first()->id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'location' => $this->location,
-            'event_date' => $this->event_date,
-            'start_time' => $this->start_time,
-            'end_time' => $this->end_time,
-            'max_participants' => $this->max_participants,
-        ]);
+        $this->form->store();
 
-        $this->event->photo_path = $this->file_upload->store('photos', 'public');
-        $this->event->save();
+        $this->form->event->group_id = auth()->user()->groups()->wherePivot('role', 'organizer')->first()->id;
+        $this->form->event->photo_path = $this->file_upload->store('photos', 'public');
+
+        $user_id = auth()->id();
+        $this->form->event->users()->syncWithoutDetaching([$user_id]);
+        $this->form->event->users()->updateExistingPivot($user_id, ['participation_status' => true]);
+
+        $this->form->event->save();
 
         session()->flash('status', 'Event successfully posted!');
         sleep(1);
         $this->showSuccessIndicator = true;
+        redirect()->route('events.show', $this->form->event);
     }
 
     public function render()
