@@ -7,15 +7,17 @@ use Livewire\Component;
 
 class EventShow extends Component
 {
-    public Event $event;
+    public ?Event $event;
     public $isGoing; // Property to track if the user is going or not
     public $organizer;
+    public $participants = 0;
 
     public function mount(Event $event)
     {
         $this->event = $event;
         $this->checkParticipation();
         $this->organizer = $this->event->group->users()->wherePivot('role', 'organizer')->first();
+        $this->countParticipants();
     }
 
     private function checkParticipation()
@@ -31,7 +33,21 @@ class EventShow extends Component
         }
     }
 
-    public function goingOrNot()
+    private function countParticipants(): int
+    {
+        $previousCount = $this->participants;
+        $newCount = $this->event->users()->wherePivot('participation_status', 1)->count();
+
+        if ($newCount !== $previousCount) {
+            $this->participants = $newCount;
+            $this->event->participants = $newCount;
+            $this->event->save();
+        }
+        return $this->participants;
+    }
+
+
+    public function goingOrNot(): void
     {
         $userId = auth()->id();
         $this->event->users()->syncWithoutDetaching([$userId]);
@@ -43,6 +59,7 @@ class EventShow extends Component
 
         // Refresh local status based on updated database entry
         $this->isGoing = $newStatus;
+        $this->countParticipants();
 
     }
 

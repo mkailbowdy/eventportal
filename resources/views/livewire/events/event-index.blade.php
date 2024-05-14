@@ -41,9 +41,15 @@
                 class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
                 <div class="flex flex-1 flex-col p-8">
                     <a href="/events/{{$event->id}}">
-                        <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
-                             src="{{ asset('storage/' . $event->group->photo_path) }}"
-                             alt="">
+                        @if($event->group->photo_path)
+                            <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
+                                 src="{{ asset('storage/' . $event->group->photo_path) }}"
+                                 alt="">
+                        @else
+                            <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
+                                 src="{{ asset('storage/' . 'photos/placeholder_group_avatar.png') }}"
+                                 alt="">
+                        @endif
                     </a>
                     <h3 class="mt-6 text-sm font-medium text-gray-900">{{$event->title}}</h3>
                     <dl class="mt-1 flex flex-grow flex-col justify-between">

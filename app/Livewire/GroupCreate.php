@@ -23,7 +23,10 @@ class GroupCreate extends Component
     {
         $this->form->update();
 
-        $this->form->group->photo_path = $this->photo->store('photos', 'public');
+        if ($this->photo) {
+            $this->form->group->photo_path = $this->photo->store('photos', 'public');
+        }
+
         $this->form->group->save();
 
         // sleep(). This prevents multiple submissions from accidental double clicking. Also the user can

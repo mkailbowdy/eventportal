@@ -29,6 +29,14 @@ class EventEdit extends Component
         return redirect(route('events.index'));
     }
 
+    public function clearImage()
+    {
+        // Clear both the event's photo path and the form's photo path
+        $this->form->event->photo_path = null;
+        $this->form->photo_path = null;
+        $this->file_upload = null;
+    }
+
     public function save()
     {
         $this->form->update();

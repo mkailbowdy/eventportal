@@ -10,6 +10,7 @@ class EventForm extends Form
 {
     public ?Event $event;
     // To add the real time validation, we still need the #[Validate] even though we used rules()
+
     #[Validate]
     public $title = '';
     #[Validate]
@@ -28,12 +29,12 @@ class EventForm extends Form
     {
         return [
             'title' => ['required', 'min:5'],
-            'description' => ['required', 'min:10'],
+            'description' => ['required', 'min:5'],
             'location' => ['required'],
+            'max_participants' => ['required', 'min:1'],
             'event_date' => ['required', 'date', 'after_or_equal:today'],
             'start_time' => ['required'],
             'end_time' => ['required'],
-            'max_participants' => ['required', 'min:1'],
         ];
     }
 
@@ -55,7 +56,14 @@ class EventForm extends Form
     public function store()
     {
         $this->validate();
-        $this->event = Event::create($this->all());
+        // Set the group_id from default 1 to the user's group id
+        $this->group_id = auth()->user()->groups()->wherePivot('role', 'organizer')->first()->id;
+        $this->event = Event::create($this->except(['file_upload']));
+
+        $user_id = auth()->id();
+        $this->event->users()->syncWithoutDetaching([$user_id]);
+        $this->event->users()->updateExistingPivot($user_id, ['participation_status' => true]);
+
 
     }
 

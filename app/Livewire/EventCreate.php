@@ -13,10 +13,6 @@ class EventCreate extends Component
 
     public EventForm $form;
 
-    public $showSuccessIndicator = false;
-
-    public $group_id;
-
     #[Validate('image|max:20480')] // 20MB Max
     public $file_upload;
 
@@ -24,19 +20,15 @@ class EventCreate extends Component
     {
         $this->form->store();
 
-        $this->form->event->group_id = auth()->user()->groups()->wherePivot('role', 'organizer')->first()->id;
-        $this->form->event->photo_path = $this->file_upload->store('photos', 'public');
-
-        $user_id = auth()->id();
-        $this->form->event->users()->syncWithoutDetaching([$user_id]);
-        $this->form->event->users()->updateExistingPivot($user_id, ['participation_status' => true]);
+        if ($this->file_upload) {
+            $this->form->event->photo_path = $this->file_upload->store('photos', 'public');
+        }
 
         $this->form->event->save();
 
         session()->flash('status', 'Event successfully posted!');
         sleep(1);
-        $this->showSuccessIndicator = true;
-        redirect()->route('events.show', $this->form->event);
+        return redirect()->route('events.show', $this->form->event);
     }
 
     public function render()

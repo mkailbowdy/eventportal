@@ -10,16 +10,27 @@
                 <section aria-labelledby="features-heading" class="relative">
                     <div
                         class="aspect-h-2 aspect-w-3 overflow-hidden sm:aspect-w-5 lg:aspect-none lg:absolute lg:h-full lg:w-1/2 lg:pr-4 xl:pr-16">
-                        <img src="{{ asset('storage/' . $event->photo_path) }}" alt="Event Photo"
-                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                        @if ($event->photo_path)
+                            <img src="{{ asset('storage/' . $event->photo_path) }}" alt="Event Photo"
+                                 class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                        @else
+                            <img src="{{ asset('storage/' . 'photos/placeholder_image.png' ) }}"
+                                 alt="Event Photo" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                        @endif
                     </div>
                     <div
                         class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 sm:pb-32 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:pt-32">
                         <div class="lg:col-start-2">
                             <a href="/events/{{$event->id}}">
-                                <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full mb-6"
-                                     src="{{ asset('storage/' . $event->group->photo_path) }}"
-                                     alt="">
+                                @if($event->group->photo_path)
+                                    <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
+                                         src="{{ asset('storage/' . $event->group->photo_path) }}"
+                                         alt="">
+                                @else
+                                    <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
+                                         src="{{ asset('storage/' . 'photos/placeholder_group_avatar.png') }}"
+                                         alt="">
+                                @endif
                             </a>
                             <h2 id="features-heading" class="text-center font-medium text-gray-500">Hosted
                                 by {{$event->group->name}}</h2>
@@ -59,7 +70,7 @@
                                 <div>
                                     <dt class="font-medium text-gray-900">Going</dt>
                                     <dd class="mt-2 text-gray-500">
-                                        {{$event->participants}} / {{$event->max_participants}} people
+                                        {{$participants}} / {{$event->max_participants}} people
                                     </dd>
                                 </div>
                                 <div>
@@ -80,7 +91,6 @@
                                                 </button>
                                             </div>
                                         @endauth
-
                                     </dd>
                                 </div>
                             </dl>
