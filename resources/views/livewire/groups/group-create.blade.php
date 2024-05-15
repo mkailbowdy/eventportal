@@ -1,5 +1,5 @@
 <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-10">
-    <form wire:submit="store">
+    <form wire:submit="save">
         @csrf
         <div class="space-y-12 sm:space-y-16">
             <div>
@@ -10,7 +10,8 @@
                 <div
                     class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="name" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Give your
+                        <label for="form.name" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Give
+                            your
                             group a memorable name<span class="text-red-500 opacity-75"
                                                         aria-hidden="true">*</span></label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
@@ -25,6 +26,7 @@
  ])
                                 >
                             </div>
+                            <small>Char count: <span x-text="$wire.get('form.name').length"></span> / 65</small>
                             @error('form.name')
                             <small class="text-red-500">
                                 <em>
@@ -36,7 +38,8 @@
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="description" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Tell
+                        <label for="form.description"
+                               class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Tell
                             everyone what your group is about<span class="text-red-500 opacity-75"
                                                                    aria-hidden="true">*</span></label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
@@ -56,22 +59,11 @@
                             @enderror
                         </div>
                     </div>
-
-                    {{--                    <div class="sm:grid sm:grid-cols-3 sm:items-center sm:gap-4 sm:py-6">--}}
-                    {{--                        <label for="photo" class="block text-sm font-medium leading-6 text-gray-900">Photo</label>--}}
-                    {{--                        <div class="mt-2 sm:col-span-2 sm:mt-0">--}}
-                    {{--                            <div class="flex items-center gap-x-3">--}}
-                    {{--                                <svg class="h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">--}}
-                    {{--                                    <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />--}}
-                    {{--                                </svg>--}}
-                    {{--                                <button type="button" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Change</button>--}}
-                    {{--                            </div>--}}
-                    {{--                        </div>--}}
-                    {{--                    </div>--}}
                     <div
                         class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                            <label for="prefecture" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Prefecture<span
+                            <label for="form.prefecture"
+                                   class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Prefecture<span
                                     class="text-red-500 opacity-75" aria-hidden="true">*</span></label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
                                 <select wire:model="form.prefecture"
@@ -96,11 +88,11 @@
                             </div>
                         </div>
                         <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                            <label for="city"
+                            <label for="form.city"
                                    class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">City<span
                                     class="text-red-500 opacity-75" aria-hidden="true">*</span></label>
                             <div class="mt-2 sm:col-span-2 sm:mt-0">
-                                <input type="text" wire:model.blur="form.city" autocomplete="city"
+                                <input type="text" wire:model.blur="form.city" autocomplete="form.city"
                                     @class([
  'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6',
  'border border-slate-300' => $errors->missing('form.city'),
@@ -128,7 +120,7 @@
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Cover
+                        <label for="file_upload" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Cover
                             photo</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
                             <div
@@ -141,15 +133,20 @@
                                               clip-rule="evenodd"/>
                                     </svg>
                                     <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                                        <label for="photo"
+                                        <label for="file_upload"
                                                class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                                             <span>Upload a file</span>
-                                            @if ($photo)
-                                                <img src="{{ $photo->temporaryUrl() }}">
+                                            @if ($file_upload)
+                                                <img src="{{ $file_upload->temporaryUrl() }}">
+                                                <x-primary-button type="button"
+                                                                  class="absolute top-0 right-0 text-red-500 bg-red-500"
+                                                                  wire:click="clearImage">X
+                                                </x-primary-button>
                                             @endif
-                                            <input wire:model="photo" id="photo" name="photo" type="file"
+                                            <input wire:model="file_upload" id="file_upload" name="file_upload"
+                                                   type="file"
                                                    class="sr-only">
-                                            @error('photo') <span class="error">{{ $message }}</span> @enderror
+                                            @error('file_upload') <span class="error">{{ $message }}</span> @enderror
                                         </label>
                                         <p class="pl-1">or drag and drop</p>
                                     </div>
@@ -180,21 +177,4 @@
             </button>
         </div>
     </form>
-
-    <!-- Success Indicator -->
-    <div
-        x-show="$wire.showSuccessIndicator"
-        x-transition.out.opacity.duration.2000ms
-        x-effect="if($wire.showSuccessIndicator) setTimeout(() => $wire.showSuccessIndicator = false, 3000)"
-        class="flex justify-end pt-4">
-        <div class="flex gap-2 items-center text-green-500 text-sm font-medium">
-            Profile updated successfully
-
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                 stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-        </div>
-    </div>
 </div>

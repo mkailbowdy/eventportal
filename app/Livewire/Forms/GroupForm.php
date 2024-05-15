@@ -9,7 +9,7 @@ use Livewire\Form;
 
 class GroupForm extends Form
 {
-    public Group $group;
+    public ?Group $group;
 
     #[Validate]
     public $name = '';
@@ -20,11 +20,14 @@ class GroupForm extends Form
     #[Validate]
     public $prefecture = '';
 
+    public $photo_path = '';
+
     public function rules()
     {
         return [
             'name' => [
                 'required',
+                'max:65',
                 Rule::unique('groups', 'name')
             ],
             'description' => ['required'],
@@ -33,11 +36,11 @@ class GroupForm extends Form
         ];
     }
 
-    public function update()
+    public function store()
     {
         // Always validate user input.
         $this->validate();
-        $this->group = Group::create($this->all());
+        $this->group = Group::create($this->except(['file_upload']));
 
         // Give the user the role of 'organizer'
         auth()->user()->removeRole('member');
