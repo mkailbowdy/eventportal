@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Event;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -23,12 +24,14 @@ class EventForm extends Form
     public $end_time;
     public $max_participants;
     public $photo_path = '';
+
+    #[Locked]
     public int $group_id = 1;
 
     public function rules()
     {
         return [
-            'title' => ['required', 'min:5'],
+            'title' => ['required', 'min:5', 'max:100'],
             'description' => ['required', 'min:5'],
             'location' => ['required'],
             'max_participants' => ['required', 'min:1'],

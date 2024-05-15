@@ -4,7 +4,8 @@
             {{ __('Create Event') }}
         </h2>
     </x-slot>
-    <form wire:submit="save">
+    <form id="create" wire:submit="save">
+        @csrf
         <div class="space-y-12 sm:space-y-16">
             <div>
                 <h2 class="text-base font-semibold leading-7 text-gray-900">Remember to give all the details of your
@@ -28,6 +29,10 @@
             'border-2 border-red-500' => $errors->has('form.title'),
             ])>
                             </div>
+                            <small>
+                                Max chars:
+                                <span x-text="$wire.get('form.title').length"></span> / 100
+                            </small>
                             @error('form.title')
                             <small class="text-red-500">
                                 <em>
@@ -150,22 +155,10 @@
                         </div>
                     </div>
 
-                    {{--                    EVENT
-
-
-
-
-
-
-
-
-
-
-
-                    IMAGES--}}
+                    {{--                    EVENT IMAGES--}}
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Event
+                        <label for="file_upload" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Event
                             Images</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">
                             <div
@@ -183,6 +176,10 @@
                                             <span>Upload a file</span>
                                             @if ($file_upload)
                                                 <img src="{{ $file_upload->temporaryUrl() }}">
+                                                <x-primary-button type="button"
+                                                                  class="absolute top-0 right-0 text-red-500 bg-red-500"
+                                                                  wire:click="clearImage">X
+                                                </x-primary-button>
                                             @endif
                                             <input wire:model="file_upload" id="file_upload" name="file_upload"
                                                    type="file" class="sr-only">
@@ -201,7 +198,7 @@
 
         <div class="flex items-center justify-end gap-x-6 py-10">
             <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-            <button type="submit"
+            <button form="create" type="submit"
                     class="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:cursor-not-allowed disabled:opacity-75">
                 Save
                 <div wire:loading.flex wire:target="save" class="flex">

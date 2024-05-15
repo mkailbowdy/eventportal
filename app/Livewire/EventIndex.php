@@ -17,6 +17,7 @@ class EventIndex extends Component
 
     public function render()
     {
+        // We're passing to the view a variable called $events which contains an Event model that includes all records.
         return view('livewire.events.event-index', [
             'events' => Event::all()
         ]);

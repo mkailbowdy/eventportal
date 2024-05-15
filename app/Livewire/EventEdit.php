@@ -23,9 +23,10 @@ class EventEdit extends Component
         $this->form->setEvent($event);
     }
 
-    public function delete()
+    public function delete(Event $event)
     {
-        $this->form->event->delete();
+        $this->authorize('delete event', $event);
+        $event->delete();
         return redirect(route('events.index'));
     }
 
