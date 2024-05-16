@@ -15,7 +15,7 @@ class EventShow extends Component
     // We're using route model binding in the mount(). This will set the above Event $event to the passed in event model.
     public function mount(Event $event)
     {
-// Delete if unnecessary       $this->event = $event;
+        $this->event = $event;
         $this->checkParticipation();
         $this->organizer = $this->event->group->users()->wherePivot('role', 'organizer')->first();
         $this->countParticipants();

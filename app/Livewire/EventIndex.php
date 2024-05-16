@@ -23,3 +23,4 @@ class EventIndex extends Component
         ]);
     }
 }
+ 

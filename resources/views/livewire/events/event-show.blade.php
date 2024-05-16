@@ -21,7 +21,7 @@
                     <div
                         class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 sm:pb-32 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:pt-32">
                         <div class="lg:col-start-2">
-                            <a href="/events/{{$event->id}}">
+                            <a href="/groups/{{$event->group->id}}">
                                 @if($event->group->photo_path)
                                     <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
                                          src="{{ asset('storage/' . $event->group->photo_path) }}"

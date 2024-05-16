@@ -34,6 +34,7 @@ class EventEdit extends Component
     {
         // Clear both the event's photo path and the form's photo path
         $this->form->event->photo_path = null;
+        $this->form->event->save();
         $this->form->photo_path = null;
         $this->file_upload = null;
     }
