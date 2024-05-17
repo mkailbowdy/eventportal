@@ -11,7 +11,7 @@ class Event extends Model
 
     protected $fillable = [
         'title', 'description', 'location', 'event_date', 'start_time', 'end_time', 'max_participants', 'group_id',
-        'participants', 'photo_path', 'gallery_path'
+        'participants', 'photo_path', 'gallery_path', 'category_id'
     ];
 
     protected $casts = [
@@ -19,6 +19,11 @@ class Event extends Model
         'start_time' => 'datetime',
         'end_time' => 'datetime',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     public function users()
     {

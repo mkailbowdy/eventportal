@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Livewire\Forms\EventForm;
 use Livewire\Attributes\Title;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -15,7 +14,6 @@ class EventCreate extends Component
 
     public EventForm $form;
 
-    #[Validate('image|max:20480')] // 20MB Max
     public $file_upload;
 
     public function save()

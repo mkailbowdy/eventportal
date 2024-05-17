@@ -28,6 +28,7 @@ class EventFactory extends Factory
         $endTime = (clone $startTime)->modify('+'.rand(1, 4).' hours');
 
         return [
+            'category_id' => 1,
             'group_id' => Group::factory(),
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,

@@ -23,9 +23,16 @@
         </div>
         <div>
             @role('organizer')
-            <a href="{{route('events.create')}}"
-               class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Create
-                Event</a>
+            <span class="relative inline-flex">
+    <a href="{{route('events.create')}}"
+       class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-sky-500 bg-white dark:bg-slate-800 transition ease-in-out duration-150 ring-1 ring-slate-900/10 dark:ring-slate-200/20">
+      Create Event
+    </a>
+    <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+    </span>
+  </span>
             @endrole
             @role('member')
             <a href="{{route('groups.create')}}"
@@ -41,14 +48,12 @@
                 class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
                 <div class="flex flex-1 flex-col p-8">
                     <a href="/events/{{$event->id}}">
-                        @if($event->group->photo_path)
-                            <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
-                                 src="{{ asset('storage/' . $event->group->photo_path) }}"
-                                 alt="">
+                        @if ($event->photo_path)
+                            <img src="{{ asset('storage/' . $event->photo_path) }}" alt="Event Photo"
+                                 class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                         @else
-                            <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
-                                 src="{{ asset('storage/' . 'photos/placeholder_group_avatar.png') }}"
-                                 alt="">
+                            <img src="{{ asset('storage/' . 'photos/placeholder_image.png' ) }}"
+                                 alt="Event Photo" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                         @endif
                     </a>
                     <h3 class="mt-6 text-sm font-medium text-gray-900">{{$event->title}}</h3>
@@ -66,38 +71,38 @@
                         <dd></dd>
                     </dl>
                 </div>
-                <div>
-                    <div class="-mt-px flex divide-x divide-gray-200">
-                        <div class="flex w-0 flex-1">
-                            <a href="mailto:janecooper@example.com"
-                               class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
-                                <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
-                                     aria-hidden="true">
-                                    <path
-                                        d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z"/>
-                                    <path
-                                        d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z"/>
-                                </svg>
-                                Details
-                            </a>
-                        </div>
-                        <div class="-ml-px flex w-0 flex-1">
-                            <button type="button"
-                                    href="tel:+1-202-555-0170"
-                                    wire:click="participate({{$event->id}})"
-                                    wire:navigate
-                                    class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
-                                <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"
-                                     aria-hidden="true">
-                                    <path fill-rule="evenodd"
-                                          d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"
-                                          clip-rule="evenodd"/>
-                                </svg>
-                                Join
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                {{--                <div>--}}
+                {{--                    <div class="-mt-px flex divide-x divide-gray-200">--}}
+                {{--                        <div class="flex w-0 flex-1">--}}
+                {{--                            <a href="mailto:janecooper@example.com"--}}
+                {{--                               class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">--}}
+                {{--                                <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"--}}
+                {{--                                     aria-hidden="true">--}}
+                {{--                                    <path--}}
+                {{--                                        d="M3 4a2 2 0 00-2 2v1.161l8.441 4.221a1.25 1.25 0 001.118 0L19 7.162V6a2 2 0 00-2-2H3z"/>--}}
+                {{--                                    <path--}}
+                {{--                                        d="M19 8.839l-7.77 3.885a2.75 2.75 0 01-2.46 0L1 8.839V14a2 2 0 002 2h14a2 2 0 002-2V8.839z"/>--}}
+                {{--                                </svg>--}}
+                {{--                                Details--}}
+                {{--                            </a>--}}
+                {{--                        </div>--}}
+                {{--                        <div class="-ml-px flex w-0 flex-1">--}}
+                {{--                            <button type="button"--}}
+                {{--                                    href="tel:+1-202-555-0170"--}}
+                {{--                                    wire:click="participate({{$event->id}})"--}}
+                {{--                                    wire:navigate--}}
+                {{--                                    class="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">--}}
+                {{--                                <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor"--}}
+                {{--                                     aria-hidden="true">--}}
+                {{--                                    <path fill-rule="evenodd"--}}
+                {{--                                          d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"--}}
+                {{--                                          clip-rule="evenodd"/>--}}
+                {{--                                </svg>--}}
+                {{--                                Join--}}
+                {{--                            </button>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
             </li>
         @endforeach
     </ul>

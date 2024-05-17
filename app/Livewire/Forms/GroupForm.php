@@ -16,10 +16,9 @@ class GroupForm extends Form
     #[Validate]
     public $description = '';
     #[Validate]
-    public $city = '';
-    #[Validate]
     public $prefecture = '';
-
+    #[Validate]
+    public $category_id;
     public $photo_path = '';
 
     public function rules()
@@ -32,7 +31,7 @@ class GroupForm extends Form
             ],
             'description' => ['required'],
             'prefecture' => ['required'],
-            'city' => ['required'],
+            'category_id' => ['required'],
         ];
     }
 

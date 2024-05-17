@@ -18,6 +18,8 @@ class EventForm extends Form
     public $description = '';
     #[Validate]
     public $location = '';
+    #[Validate]
+    public $category_id;
 
     public $event_date;
     public $start_time;
@@ -38,6 +40,7 @@ class EventForm extends Form
             'event_date' => ['required', 'date', 'after_or_equal:today'],
             'start_time' => ['required'],
             'end_time' => ['required'],
+            'category_id' => ['required'],
         ];
     }
 
@@ -53,6 +56,7 @@ class EventForm extends Form
         $this->start_time = $this->event->start_time->format('H:i');
         $this->end_time = $this->event->end_time->format('H:i');
         $this->photo_path = $this->event->photo_path;
+        $this->category_id = $this->event->category_id;
 
     }
 
@@ -84,6 +88,7 @@ class EventForm extends Form
         $this->event->start_time = $this->start_time;
         $this->event->end_time = $this->end_time;
         $this->event->photo_path = $this->photo_path;
+        $this->event->category_id = $this->category_id;
 
         $this->event->save();
     }

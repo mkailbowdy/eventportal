@@ -5,7 +5,6 @@ namespace App\Livewire;
 
 use App\Livewire\Forms\GroupForm;
 use Livewire\Attributes\Title;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -16,7 +15,6 @@ class GroupCreate extends Component
 
     public GroupForm $form;
 
-    #[Validate('image|max:20480')] // 20MB Max
     public $file_upload;
 
     public function save()

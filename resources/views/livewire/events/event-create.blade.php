@@ -67,6 +67,35 @@
                     </div>
 
                     <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+                        <label for="form.category_id"
+                               class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Category<span
+                                class="text-red-500 opacity-75" aria-hidden="true">*</span></label>
+                        <div class="mt-2 sm:col-span-2 sm:mt-0">
+                            <select wire:model="form.category_id"
+                            >
+                                <option value="" @class([
+    'border border-slate-300' => $errors->missing('form.category_id'),
+    'border-2 border-red-500' => $errors->has('form.category_id'),
+    ])
+                                >Choose a category
+                                </option>
+                                <option value="1">Language Exchange</option>
+                                <option value="2">Outdoor</option>
+                                <option value="3">Social</option>
+                                <option value="4">Sports</option>
+                                <option value="5">Exercise</option>
+                            </select>
+                            @error('form.category_id')
+                            <small class="text-red-500">
+                                <em>
+                                    {{$message}}
+                                </em>
+                            </small>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
                         <label for="form.location"
                                class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Location</label>
                         <div class="mt-2 sm:col-span-2 sm:mt-0">

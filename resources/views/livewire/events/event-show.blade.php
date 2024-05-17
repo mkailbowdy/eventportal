@@ -40,7 +40,7 @@
                             {{--                            Need to check if $organizer is not null AND auth()->id() === $organizer->id because--}}
                             {{--                            We need to check if an object is not null before we can access properties or methods of that object --}}
                             @if($organizer && auth()->id() === $organizer->id)
-                                <div class="mx-auto">
+                                <div class="mx-auto mt-6">
                                     <a href="{{ route('events.edit', ['event' => $event->id]) }}"
                                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white bg-gray-800 hover:bg-gray-700 uppercase tracking-widest transition ease-in-out duration-150">
                                         Edit Event
@@ -77,6 +77,7 @@
                                     <dt class="font-medium text-gray-900">Want to Join?</dt>
                                     <dd class="mt-2 text-gray-500">
                                         @guest
+
                                             <div class="mx-auto">
                                                 <a href="/login"
                                                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white bg-gray-800 hover:bg-gray-700 uppercase tracking-widest transition ease-in-out duration-150">Join</a>
