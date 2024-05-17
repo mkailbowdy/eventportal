@@ -73,27 +73,33 @@
                                         {{$participants}} / {{$event->max_participants}} people
                                     </dd>
                                 </div>
-                                <div>
-                                    <dt class="font-medium text-gray-900">Want to Join?</dt>
-                                    <dd class="mt-2 text-gray-500">
-                                        @guest
 
-                                            <div class="mx-auto">
-                                                <a href="/login"
-                                                   class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white bg-gray-800 hover:bg-gray-700 uppercase tracking-widest transition ease-in-out duration-150">Join</a>
-                                            </div>
-                                        @endguest
-                                        @auth
-                                            <div x-data="{ isGoing: @entangle('isGoing') }">
-                                                <button @click="isGoing = !isGoing; $wire.goingOrNot()"
-                                                        :class="isGoing ? 'bg-red-500 hover:bg-red-700' : 'bg-gray-800 hover:bg-gray-700'"
-                                                        class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest transition ease-in-out duration-150">
-                                                    <span x-text="isGoing ? 'I changed my mind...' : 'Join!'"></span>
-                                                </button>
-                                            </div>
-                                        @endauth
-                                    </dd>
-                                </div>
+                                @if(!$organizer || auth()->id() !== $organizer->id)
+                                    <div>
+                                        <dt class="font-medium text-gray-900">Want to Join?</dt>
+                                        <dd class="mt-2 text-gray-500">
+                                            @guest
+
+                                                <div class="mx-auto">
+                                                    <a href="/login"
+                                                       class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white bg-gray-800 hover:bg-gray-700 uppercase tracking-widest transition ease-in-out duration-150">Join</a>
+                                                </div>
+                                            @endguest
+                                            @auth
+                                                <div x-data="{ isGoing: @entangle('isGoing') }">
+                                                    <button @click="isGoing = !isGoing; $wire.goingOrNot()"
+                                                            :class="isGoing ? 'bg-red-500 hover:bg-red-700' : 'bg-gray-800 hover:bg-gray-700'"
+                                                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest transition ease-in-out duration-150">
+                                                        <span
+                                                            x-text="isGoing ? 'I changed my mind...' : 'Join!'"></span>
+                                                    </button>
+                                                </div>
+                                            @endauth
+                                        </dd>
+                                    </div>
+                                @endif
+
+
                             </dl>
                         </div>
                     </div>

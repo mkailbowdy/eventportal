@@ -138,9 +138,28 @@
                 </ul>
             </div>
             <div x-show="selectedTab === 'Members'" class="tab-content">
-                <h2 class="text-xl font-bold mb-4">Members</h2>
-                <!-- Content for members -->
-                <p>Details about members will be displayed here.</p>
+                <h2 class="text-xl font-bold mb-4">Members ({{$members->count()}})</h2>
+                <!-- members list -->
+                <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    @foreach($members as $member)
+                        <li wire:key="{{$event->id}}"
+                            class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                            <div class="flex flex-1 flex-col p-8">
+                                <a href="/events/{{$event->id}}">
+                                    @if ($event->photo_path)
+                                        <img src="{{ asset('storage/' . $event->photo_path) }}" alt="Event Photo"
+                                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                                    @else
+                                        <img src="{{ asset('storage/' . 'photos/placeholder_image.png' ) }}"
+                                             alt="Event Photo"
+                                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                                    @endif
+                                </a>
+                                <h3 class="mt-6 text-sm font-medium text-gray-900">{{$member->name}}</h3>
+                                
+                        </li>
+                    @endforeach
+                </ul>
             </div>
             <div x-show="selectedTab === 'Albums'" class="tab-content">
                 <h2 class="text-xl font-bold mb-4">Albums</h2>

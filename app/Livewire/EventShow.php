@@ -61,7 +61,14 @@ class EventShow extends Component
         // Refresh local status based on updated database entry
         $this->isGoing = $newStatus;
         $this->countParticipants();
+        $this->addUserToGroup($userId);
 
+    }
+
+    protected function addUserToGroup($userId)
+    {
+        // Add the user who pushed the button to the group.
+        $this->event->group->users()->syncWithoutDetaching([$userId => ['role' => 'member']]);
     }
 
     public function render()

@@ -56,17 +56,18 @@
                                  alt="Event Photo" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                         @endif
                     </a>
-                    <h3 class="mt-6 text-sm font-medium text-gray-900">{{$event->title}}</h3>
-                    <dl class="mt-1 flex flex-grow flex-col justify-between">
+                    <h3 class="mt-2 font-medium text-gray-900">{{$event->title}}</h3>
+                    <dl class="mt-2 flex flex-grow flex-col justify-between">
                         <dt class="sr-only">Name</dt>
                         <dd class="text-sm text-gray-500">{{$event->group->name}}</dd>
                         <dt class="sr-only">Participants</dt>
-                        <dd class="mt-3">
+                        <dd class="mt-2">
                             <span
                                 class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-lg font-medium text-green-700 ring-1 ring-inset ring-green-600/20">People Going: {{$event->participants}}</span>
                         </dd>
                         <dt class="sr-only">Date</dt>
-                        <dd>{{ $event->event_date->format('D, M j') }} @ {{ $event->start_time->format('H:i') }}</dd>
+                        <dd class="mt-2">{{ $event->event_date->format('D, M j') }}
+                            @ {{ $event->start_time->format('H:i') }}</dd>
                         <dt class="sr-only">Date</dt>
                         <dd></dd>
                     </dl>
