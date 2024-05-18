@@ -1,245 +1,426 @@
+{{--<div class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-6">--}}
+{{--    <x-slot name="header">--}}
+{{--        <h2 class="font-semibold text-xl text-gray-800 leading-tight">--}}
+{{--            {{ __('Create Event') }}--}}
+{{--        </h2>--}}
+{{--    </x-slot>--}}
+{{--    <form id="create" wire:submit="save">--}}
+{{--        @csrf--}}
+{{--        <div class="space-y-12 sm:space-y-16">--}}
+{{--            <div>--}}
+{{--                <h2 class="text-base font-semibold leading-7 text-gray-900">Remember to give all the details of your--}}
+{{--                    event!</h2>--}}
+{{--                <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-600">Please review our community guidelines</p>--}}
+
+{{--                <div--}}
+{{--                    class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">--}}
+{{--                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">--}}
+{{--                        <label for="form.title"--}}
+{{--                               class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Title</label>--}}
+{{--                        <div class="mt-2 sm:col-span-2 sm:mt-0">--}}
+{{--                            <div--}}
+{{--                                class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">--}}
+{{--                                <input type="text" name="form.title" id="form.title" autocomplete="form.title"--}}
+{{--                                       wire:model.blur='form.title'--}}
+{{--                                       placeholder="e.g. English and Japanese Cultural Exchange"--}}
+{{--                                    @class([--}}
+{{--            'block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6',--}}
+{{--            'border border-slate-300' => $errors->missing('form.title'),--}}
+{{--            'border-2 border-red-500' => $errors->has('form.title'),--}}
+{{--            ])>--}}
+{{--                            </div>--}}
+{{--                            <small>--}}
+{{--                                Max chars:--}}
+{{--                                <span x-text="$wire.get('form.title').length"></span> / 100--}}
+{{--                            </small>--}}
+{{--                            @error('form.title')--}}
+{{--                            <small class="text-red-500">--}}
+{{--                                <em>--}}
+{{--                                    {{$message}}--}}
+{{--                                </em>--}}
+{{--                            </small>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">--}}
+{{--                        <label for="form.description"--}}
+{{--                               class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Description</label>--}}
+{{--                        <div class="mt-2 sm:col-span-2 sm:mt-0">--}}
+{{--                        <textarea id="form.description" name="form.description" rows="3"--}}
+{{--                                  wire:model.blur="form.description"--}}
+{{--                                  @class([--}}
+{{--        'block w-full max-w-2xl rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',--}}
+{{--        'border border-slate-300' => $errors->missing('form.description'),--}}
+{{--        'border-2 border-red-500' => $errors->has('form.description'),--}}
+{{--        ])></textarea>--}}
+{{--                            @error('form.description')--}}
+{{--                            <small class="text-red-500">--}}
+{{--                                <em>--}}
+{{--                                    {{$message}}--}}
+{{--                                </em>--}}
+{{--                            </small>--}}
+{{--                            @enderror--}}
+{{--                            <p class="mt-3 text-sm leading-6 text-gray-600">Write about your event. Add as much detail--}}
+{{--                                as possible for your event goers.</p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">--}}
+{{--                        <label for="form.category_id"--}}
+{{--                               class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Category<span--}}
+{{--                                class="text-red-500 opacity-75" aria-hidden="true">*</span></label>--}}
+{{--                        <div class="mt-2 sm:col-span-2 sm:mt-0">--}}
+{{--                            <select wire:model="form.category_id"--}}
+{{--                            >--}}
+{{--                                <option value="" @class([--}}
+{{--    'border border-slate-300' => $errors->missing('form.category_id'),--}}
+{{--    'border-2 border-red-500' => $errors->has('form.category_id'),--}}
+{{--    ])--}}
+{{--                                >Choose a category--}}
+{{--                                </option>--}}
+{{--                                <option value="1">Language Exchange</option>--}}
+{{--                                <option value="2">Outdoor</option>--}}
+{{--                                <option value="3">Social</option>--}}
+{{--                                <option value="4">Sports</option>--}}
+{{--                                <option value="5">Exercise</option>--}}
+{{--                            </select>--}}
+{{--                            @error('form.category_id')--}}
+{{--                            <small class="text-red-500">--}}
+{{--                                <em>--}}
+{{--                                    {{$message}}--}}
+{{--                                </em>--}}
+{{--                            </small>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">--}}
+{{--                        <label for="form.location"--}}
+{{--                               class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Location</label>--}}
+{{--                        <div class="mt-2 sm:col-span-2 sm:mt-0">--}}
+{{--                            <input type="text" name="form.location" id="form.location" autocomplete="form.location"--}}
+{{--                                   wire:model.blur="form.location"--}}
+{{--                                @class([--}}
+{{--         'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xl sm:text-sm sm:leading-6',--}}
+{{--         'border border-slate-300' => $errors->missing('form.location'),--}}
+{{--         'border-2 border-red-500' => $errors->has('form.location'),--}}
+{{--         ])>--}}
+{{--                            @error('form.location')--}}
+{{--                            <small class="text-red-500">--}}
+{{--                                <em>--}}
+{{--                                    {{$message}}--}}
+{{--                                </em>--}}
+{{--                            </small>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">--}}
+{{--                        <label for="form.max_participants"--}}
+{{--                               class=" text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Capacity</label>--}}
+{{--                        <div class="mt-2 sm:col-span-2 sm:mt-0">--}}
+{{--                            <input wire:model="form.max_participants" type="number" name="form.max_participants"--}}
+{{--                                   id="form.max_participants" autocomplete="form.max_participants" min="1"--}}
+{{--                                @class([--}}
+{{--         'block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xl sm:text-sm sm:leading-6',--}}
+{{--         'border border-slate-300' => $errors->missing('form.max_participants'),--}}
+{{--         'border-2 border-red-500' => $errors->has('form.max_participants'),--}}
+{{--         ])--}}
+{{--                            >--}}
+{{--                            @error('form.max_participants')--}}
+{{--                            <small class="text-red-500">--}}
+{{--                                <em>--}}
+{{--                                    {{$message}}--}}
+{{--                                </em>--}}
+{{--                            </small>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">--}}
+{{--                        <label for="form.event_date"--}}
+{{--                               class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Event Date</label>--}}
+{{--                        <div class="mt-2 sm:col-span-2 sm:mt-0">--}}
+{{--                            <input wire:model="form.event_date" type="date" id="form.event_date" name="form.event_date"--}}
+{{--                                   min="{{ now()->toDateString() }}">--}}
+{{--                            @error('form.event_date')--}}
+{{--                            <small class="text-red-500">--}}
+{{--                                <em>--}}
+{{--                                    {{$message}}--}}
+{{--                                </em>--}}
+{{--                            </small>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">--}}
+{{--                        <label for="form.start_time"--}}
+{{--                               class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Start Time</label>--}}
+{{--                        <div class="mt-2 sm:col-span-2 sm:mt-0">--}}
+{{--                            <input wire:model="form.start_time" type="time" id="form.start_time" name="form.start_time">--}}
+{{--                            @error('form.start_time')--}}
+{{--                            <small class="text-red-500">--}}
+{{--                                <em>--}}
+{{--                                    {{$message}}--}}
+{{--                                </em>--}}
+{{--                            </small>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">--}}
+{{--                        <label for="form.end_time" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">End--}}
+{{--                            Time</label>--}}
+{{--                        <div class="mt-2 sm:col-span-2 sm:mt-0">--}}
+{{--                            <input wire:model="form.end_time" type="time" id="form.end_time" name="form.end_time">--}}
+{{--                            @error('form.end_time')--}}
+{{--                            <small class="text-red-500">--}}
+{{--                                <em>--}}
+{{--                                    {{$message}}--}}
+{{--                                </em>--}}
+{{--                            </small>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    --}}{{--                    EVENT IMAGES--}}
+
+{{--                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">--}}
+{{--                        <label for="file_upload" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Event--}}
+{{--                            Images</label>--}}
+{{--                        <div class="mt-2 sm:col-span-2 sm:mt-0">--}}
+{{--                            <div--}}
+{{--                                class="flex max-w-2xl justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">--}}
+{{--                                <div class="text-center">--}}
+{{--                                    <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor"--}}
+{{--                                         aria-hidden="true">--}}
+{{--                                        <path fill-rule="evenodd"--}}
+{{--                                              d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"--}}
+{{--                                              clip-rule="evenodd"/>--}}
+{{--                                    </svg>--}}
+{{--                                    <div class="mt-4 flex text-sm leading-6 text-gray-600">--}}
+{{--                                        <label for="file_upload"--}}
+{{--                                               class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">--}}
+{{--                                            <span>Upload a file</span>--}}
+{{--                                            @if ($file_upload)--}}
+{{--                                                <img src="{{ $file_upload->temporaryUrl() }}">--}}
+{{--                                                <x-button-cancel wire:click="clearImage()"/>--}}
+{{--                                            @endif--}}
+{{--                                            <input wire:model="file_upload" id="file_upload" name="file_upload"--}}
+{{--                                                   type="file" class="sr-only">--}}
+{{--                                            @error('file_upload') <span class="error">{{ $message }}</span> @enderror--}}
+{{--                                        </label>--}}
+{{--                                        <p class="pl-1">or drag and drop</p>--}}
+{{--                                    </div>--}}
+{{--                                    <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+
+{{--        <div class="flex items-center justify-end gap-x-6 py-10">--}}
+{{--            <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>--}}
+{{--            <button form="create" type="submit"--}}
+{{--                    class="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:cursor-not-allowed disabled:opacity-75">--}}
+{{--                Save--}}
+{{--                <div wire:loading.flex wire:target="save" class="flex">--}}
+{{--                    <svg class="animate-spin mx-1 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"--}}
+{{--                         viewBox="0 0 24 24">--}}
+{{--                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"--}}
+{{--                                stroke-width="4"></circle>--}}
+{{--                        <path class="opacity-75" fill="currentColor"--}}
+{{--                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>--}}
+{{--                    </svg>--}}
+{{--                </div>--}}
+{{--            </button>--}}
+{{--        </div>--}}
+{{--    </form>--}}
+{{--</div>--}}
+
 <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-6">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Create Event') }}
         </h2>
     </x-slot>
-    <form id="create" wire:submit="save">
+    <form id="create" wire:submit.prevent="save" class="space-y-12">
         @csrf
-        <div class="space-y-12 sm:space-y-16">
-            <div>
-                <h2 class="text-base font-semibold leading-7 text-gray-900">Remember to give all the details of your
-                    event!</h2>
-                <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-600">Please review our community guidelines</p>
-
-                <div
-                    class="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="form.title"
-                               class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Title</label>
-                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <div
-                                class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                <input type="text" name="form.title" id="form.title" autocomplete="form.title"
-                                       wire:model.blur='form.title'
-                                       placeholder="e.g. English and Japanese Cultural Exchange"
-                                    @class([
-            'block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6',
-            'border border-slate-300' => $errors->missing('form.title'),
-            'border-2 border-red-500' => $errors->has('form.title'),
-            ])>
-                            </div>
-                            <small>
-                                Max chars:
-                                <span x-text="$wire.get('form.title').length"></span> / 100
-                            </small>
-                            @error('form.title')
-                            <small class="text-red-500">
-                                <em>
-                                    {{$message}}
-                                </em>
-                            </small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="form.description"
-                               class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Description</label>
-                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                        <textarea id="form.description" name="form.description" rows="3"
-                                  wire:model.blur="form.description"
-                                  @class([
-        'block w-full max-w-2xl rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
-        'border border-slate-300' => $errors->missing('form.description'),
-        'border-2 border-red-500' => $errors->has('form.description'),
-        ])></textarea>
-                            @error('form.description')
-                            <small class="text-red-500">
-                                <em>
-                                    {{$message}}
-                                </em>
-                            </small>
-                            @enderror
-                            <p class="mt-3 text-sm leading-6 text-gray-600">Write about your event. Add as much detail
-                                as possible for your event goers.</p>
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="form.category_id"
-                               class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Category<span
-                                class="text-red-500 opacity-75" aria-hidden="true">*</span></label>
-                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <select wire:model="form.category_id"
-                            >
-                                <option value="" @class([
-    'border border-slate-300' => $errors->missing('form.category_id'),
-    'border-2 border-red-500' => $errors->has('form.category_id'),
-    ])
-                                >Choose a category
-                                </option>
-                                <option value="1">Language Exchange</option>
-                                <option value="2">Outdoor</option>
-                                <option value="3">Social</option>
-                                <option value="4">Sports</option>
-                                <option value="5">Exercise</option>
-                            </select>
-                            @error('form.category_id')
-                            <small class="text-red-500">
-                                <em>
-                                    {{$message}}
-                                </em>
-                            </small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="form.location"
-                               class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Location</label>
-                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <input type="text" name="form.location" id="form.location" autocomplete="form.location"
-                                   wire:model.blur="form.location"
-                                @class([
-         'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xl sm:text-sm sm:leading-6',
-         'border border-slate-300' => $errors->missing('form.location'),
-         'border-2 border-red-500' => $errors->has('form.location'),
-         ])>
-                            @error('form.location')
-                            <small class="text-red-500">
-                                <em>
-                                    {{$message}}
-                                </em>
-                            </small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="form.max_participants"
-                               class=" text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Capacity</label>
-                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <input wire:model="form.max_participants" type="number" name="form.max_participants"
-                                   id="form.max_participants" autocomplete="form.max_participants" min="1"
-                                @class([
-         'block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xl sm:text-sm sm:leading-6',
-         'border border-slate-300' => $errors->missing('form.max_participants'),
-         'border-2 border-red-500' => $errors->has('form.max_participants'),
-         ])
-                            >
-                            @error('form.max_participants')
-                            <small class="text-red-500">
-                                <em>
-                                    {{$message}}
-                                </em>
-                            </small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="form.event_date"
-                               class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Event Date</label>
-                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <input wire:model="form.event_date" type="date" id="form.event_date" name="form.event_date"
-                                   min="{{ now()->toDateString() }}">
-                            @error('form.event_date')
-                            <small class="text-red-500">
-                                <em>
-                                    {{$message}}
-                                </em>
-                            </small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="form.start_time"
-                               class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Start Time</label>
-                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <input wire:model="form.start_time" type="time" id="form.start_time" name="form.start_time">
-                            @error('form.start_time')
-                            <small class="text-red-500">
-                                <em>
-                                    {{$message}}
-                                </em>
-                            </small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="form.end_time" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">End
-                            Time</label>
-                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <input wire:model="form.end_time" type="time" id="form.end_time" name="form.end_time">
-                            @error('form.end_time')
-                            <small class="text-red-500">
-                                <em>
-                                    {{$message}}
-                                </em>
-                            </small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    {{--                    EVENT IMAGES--}}
-
-                    <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-                        <label for="file_upload" class="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5">Event
-                            Images</label>
-                        <div class="mt-2 sm:col-span-2 sm:mt-0">
-                            <div
-                                class="flex max-w-2xl justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                                <div class="text-center">
-                                    <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor"
-                                         aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                              d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
-                                              clip-rule="evenodd"/>
-                                    </svg>
-                                    <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                                        <label for="file_upload"
-                                               class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-                                            <span>Upload a file</span>
-                                            @if ($file_upload)
-                                                <img src="{{ $file_upload->temporaryUrl() }}">
-                                                <x-primary-button type="button"
-                                                                  class="absolute top-0 right-0 text-red-500 bg-red-500"
-                                                                  wire:click="clearImage">X
-                                                </x-primary-button>
-                                            @endif
-                                            <input wire:model="file_upload" id="file_upload" name="file_upload"
-                                                   type="file" class="sr-only">
-                                            @error('file_upload') <span class="error">{{ $message }}</span> @enderror
-                                        </label>
-                                        <p class="pl-1">or drag and drop</p>
-                                    </div>
-                                    <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div>
+            <h2 class="text-base font-semibold leading-7 text-gray-900">Remember to give all the details of your
+                event!</h2>
+            <p class="mt-1 max-w-2xl text-sm text-gray-600">Please review our community guidelines</p>
         </div>
 
-        <div class="flex items-center justify-end gap-x-6 py-10">
-            <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-            <button form="create" type="submit"
-                    class="inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:cursor-not-allowed disabled:opacity-75">
-                Save
-                <div wire:loading.flex wire:target="save" class="flex">
-                    <svg class="animate-spin mx-1 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                         viewBox="0 0 24 24">
+        <div class="space-y-8 divide-y divide-gray-200">
+            <div class="sm:space-y-6">
+                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:py-6">
+                    <label for="form.title" class="block text-sm font-medium text-gray-900 sm:pt-2">Title</label>
+                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                        <div class="relative rounded-md shadow-sm">
+                            <input type="text" name="form.title" id="form.title" autocomplete="form.title"
+                                   wire:model.blur="form.title"
+                                   placeholder="e.g. English and Japanese Cultural Exchange"
+                                   class="block w-full pr-10 border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            @if ($errors->has('form.title'))
+                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                    <svg class="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                              d="M18 8a8 8 0 11-16 0 8 8 0 0116 0zm-8 4a1 1 0 100-2 1 1 0 000 2zm-1-4a1 1 0 112-0 1 1 0 01-2 0z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            @endif
+                        </div>
+                        <small class="block mt-1 text-sm text-gray-600">Max chars: <span
+                                x-text="$wire.get('form.title').length"></span> / 100</small>
+                        @error('form.title')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:py-6">
+                    <label for="form.description"
+                           class="block text-sm font-medium text-gray-900 sm:pt-2">Description</label>
+                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                        <textarea id="form.description" name="form.description" rows="3"
+                                  wire:model.blur="form.description"
+                                  class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                        @error('form.description')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                        <p class="mt-2 text-sm text-gray-600">Write about your event. Add as much detail as possible for
+                            your event goers.</p>
+                    </div>
+                </div>
+
+                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:py-6">
+                    <label for="form.category_id" class="block text-sm font-medium text-gray-900 sm:pt-2">Category <span
+                            class="text-red-500">*</span></label>
+                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                        <select wire:model="form.category_id"
+                                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <option value="">Choose a category</option>
+                            <option value="1">Language Exchange</option>
+                            <option value="2">Outdoor</option>
+                            <option value="3">Social</option>
+                            <option value="4">Sports</option>
+                            <option value="5">Exercise</option>
+                        </select>
+                        @error('form.category_id')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:py-6">
+                    <label for="form.location" class="block text-sm font-medium text-gray-900 sm:pt-2">Location</label>
+                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                        <input type="text" name="form.location" id="form.location" autocomplete="form.location"
+                               wire:model.blur="form.location"
+                               class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        @error('form.location')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:py-6">
+                    <label for="form.max_participants"
+                           class="block text-sm font-medium text-gray-900 sm:pt-2">Capacity</label>
+                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                        <input wire:model="form.max_participants" type="number" name="form.max_participants"
+                               id="form.max_participants" autocomplete="form.max_participants" min="1"
+                               class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        @error('form.max_participants')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:py-6">
+                    <label for="form.event_date" class="block text-sm font-medium text-gray-900 sm:pt-2">Event
+                        Date</label>
+                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                        <input wire:model="form.event_date" type="date" id="form.event_date" name="form.event_date"
+                               min="{{ now()->toDateString() }}"
+                               class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        @error('form.event_date')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:py-6">
+                    <label for="form.start_time" class="block text-sm font-medium text-gray-900 sm:pt-2">Start
+                        Time</label>
+                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                        <input wire:model="form.start_time" type="time" id="form.start_time" name="form.start_time"
+                               class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        @error('form.start_time')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:py-6">
+                    <label for="form.end_time" class="block text-sm font-medium text-gray-900 sm:pt-2">End Time</label>
+                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                        <input wire:model="form.end_time" type="time" id="form.end_time" name="form.end_time"
+                               class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        @error('form.end_time')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-6 sm:py-6">
+                    <label for="file_upload" class="block text-sm font-medium text-gray-900">Event Main Image</label>
+                    <div class="sm:col-span-2">
+                        <div class="flex items-center">
+                            <label for="file_upload"
+                                   class="cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Choose an image
+                            </label>
+                            <input type="file" wire:model="file_upload" id="file_upload" name="file_upload"
+                                   class="hidden">
+                        </div>
+                        @if ($file_upload)
+                            <div class="relative mt-4">
+                                <img src="{{ $file_upload->temporaryUrl() }}" alt="Temporary Event Photo"
+                                     class="w-full max-h-64 object-contain rounded-md border border-gray-300 p-2 hover:shadow-lg transition-shadow duration-300 ease-in-out">
+                                <x-button-cancel class="absolute top-2 right-2" wire:click="clearImage()"/>
+                            </div>
+                        @endif
+                        @error('file_upload')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="flex items-center justify-end gap-x-6 py-6">
+                <a href="{{ route('events.index') }}" class="text-sm font-semibold text-gray-900">Cancel</a>
+                <button type="submit"
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Save
+                    <svg class="animate-spin ml-2 h-5 w-5 text-white" wire:loading wire:target="save"
+                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
                                 stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor"
                               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                </div>
-            </button>
+                </button>
+            </div>
         </div>
     </form>
 </div>
+

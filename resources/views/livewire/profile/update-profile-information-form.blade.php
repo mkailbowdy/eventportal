@@ -117,21 +117,14 @@ new class extends Component {
                                id="file_upload"
                                name="file_upload"
                                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"/>
-                        <button type="button"
-                                class="absolute top-0 -right-8 text-white bg-gray-400 px-1 rounded"
-                                wire:click="clearImage">x
-                        </button>
+                        <x-button-cancel wire:click="clearImage"/>
                     </div>
 
                     @if ($file_upload)
                         <div class="relative inline-block mt-2 mb-2">
-                            <div><strong>Your new profile image!</strong></div>
                             <img src="{{ $file_upload->temporaryUrl() }}"
                                  class="rounded-full object-cover min-w-[128px] border border-gray2 h-32 w-32">
-                            <button type="button"
-                                    class="absolute top-0 -right-8 text-gray-600 px-1 rounded"
-                                    wire:click="cancelImage">X
-                            </button>
+                            <x-button-cancel wire:click="cancelImage"/>
                         </div>
 
                     @endif
@@ -141,10 +134,7 @@ new class extends Component {
                     @if ($file_upload)
                         <img src="{{ $file_upload->temporaryUrl() }}"
                              class="rounded-full object-cover min-w-[128px] border border-gray2 h-32 w-32">
-                        <button type="button"
-                                class="absolute top-0 -right-8 text-white bg-gray-400 px-1 rounded"
-                                wire:click="clearImage">x
-                        </button>
+                        <x-button-cancel wire:click="cancelImage"/>
 
                     @else
                         <label for="file_upload" class="cursor-pointer">
@@ -168,7 +158,8 @@ new class extends Component {
 
         <div>
             <x-input-label for="email" :value="__('Email')"/>
-            <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full" required
+            <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full"
+                          required
                           autocomplete="username"/>
             <x-input-error class="mt-2" :messages="$errors->get('email')"/>
 
