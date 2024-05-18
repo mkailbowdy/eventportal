@@ -23,9 +23,10 @@
                         <div class="lg:col-start-2">
                             <a href="/groups/{{$event->group->id}}">
                                 @if($event->group->photo_path)
-                                    <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
-                                         src="{{ asset('storage/' . $event->group->photo_path) }}"
-                                         alt="">
+                                    <img
+                                        class="mx-auto rounded-full object-cover min-w-[128px] border border-gray2 h-32 w-32"
+                                        src="{{ asset('storage/' . $event->group->photo_path) }}"
+                                        alt="">
                                 @else
                                     <img class="mx-auto h-32 w-32 flex-shrink-0 rounded-full"
                                          src="{{ asset('storage/' . 'photos/placeholder_group_avatar.png') }}"

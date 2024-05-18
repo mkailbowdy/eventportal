@@ -30,11 +30,15 @@ class EventEdit extends Component
         return redirect(route('events.index'));
     }
 
+    public function cancelImage()
+    {
+        $this->file_upload = null;
+    }
+
     public function clearImage()
     {
         // Clear both the event's photo path and the form's photo path
         $this->form->event->photo_path = null;
-        $this->form->event->save();
         $this->form->photo_path = null;
         $this->file_upload = null;
     }
@@ -43,6 +47,7 @@ class EventEdit extends Component
     {
         $this->form->update();
 
+        // save the image to the photo_path in the database
         if ($this->file_upload) {
             $this->form->event->photo_path = $this->file_upload->store('photos', 'public');
         }

@@ -142,21 +142,22 @@
                 <!-- members list -->
                 <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     @foreach($members as $member)
-                        <li wire:key="{{$event->id}}"
-                            class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                        <li wire:key="{{$member->id}}"
+                            class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center">
                             <div class="flex flex-1 flex-col p-8">
-                                <a href="/events/{{$event->id}}">
-                                    @if ($event->photo_path)
-                                        <img src="{{ asset('storage/' . $event->photo_path) }}" alt="Event Photo"
-                                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                                <h3 class="mt-6 text-sm font-medium text-gray-900">{{$member->name}}</h3>
+
+                                <a href="">
+                                    @if ($member->photo_path)
+                                        <img src="{{ asset('storage/' . $member->photo_path) }}" alt="Event Photo"
+                                             class="mx-auto rounded-full object-cover min-w-[128px] border border-gray2 h-32 w-32">
                                     @else
                                         <img src="{{ asset('storage/' . 'photos/placeholder_image.png' ) }}"
                                              alt="Event Photo"
-                                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                                             class="rounded-full object-cover min-w-[128px] border border-gray2 h-32 w-32">
                                     @endif
                                 </a>
-                                <h3 class="mt-6 text-sm font-medium text-gray-900">{{$member->name}}</h3>
-                                
+                            </div>
                         </li>
                     @endforeach
                 </ul>
