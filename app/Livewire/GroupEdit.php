@@ -2,35 +2,35 @@
 
 namespace App\Livewire;
 
-use App\Livewire\Forms\EventForm;
-use App\Models\Event;
+use App\Livewire\Forms\GroupForm;
+use App\Models\Group;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class EventEdit extends Component
+class GroupEdit extends Component
 {
+
     use WithFileUploads;
 
-    public EventForm $form;
+    public GroupForm $form;
 
-    #[Validate('image|max:20480')] // 20MB Max
+    #[Validate('image|max:20480')]
     public $file_upload;
     public $showSuccessIndicator = false;
 
-    public function mount(Event $event)
+    public function mount(Group $group)
     {
-        $this->form->event = Event::findOrFail($event->id);
-        $this->authorize('update', $this->form->event);
+        $this->form->group = Group::findOrFail($group->id);
+        $this->authorize('update', $this->form->group);
 
-        $this->form->setEvent($event);
+        $this->form->setGroup($group);
     }
 
-    public function delete(Event $event)
+    public function delete(Group $group)
     {
-        $this->authorize('delete event', $event);
-        $event->delete();
-        return redirect(route('events.index'));
+        $group->delete();
+        return redirect()->route('events.index');
     }
 
     public function cancelImage()
@@ -52,19 +52,19 @@ class EventEdit extends Component
 
         // save the image to the photo_path in the database
         if ($this->file_upload) {
-            $this->form->event->photo_path = $this->file_upload->store('photos', 'public');
+            $this->form->group->photo_path = $this->file_upload->store('photos', 'public');
         }
 
-        $this->form->event->save();
+        $this->form->group->save();
 
         sleep(1);
 
         $this->showSuccessIndicator = true;
-        return redirect(route('events.show', $this->form->event));
+        return redirect(route('events.show', $this->form->group));
     }
 
     public function render()
     {
-        return view('livewire.events.event-edit');
+        return view('livewire.groups.group-edit');
     }
 }
