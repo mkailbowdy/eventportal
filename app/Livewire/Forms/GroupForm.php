@@ -27,7 +27,7 @@ class GroupForm extends Form
             'name' => [
                 'required',
                 'max:65',
-                Rule::unique('groups', 'name')
+                Rule::unique('groups', 'name')->ignore($this->group),
             ],
             'description' => ['required'],
             'prefecture' => ['required'],

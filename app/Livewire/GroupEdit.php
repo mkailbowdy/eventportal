@@ -41,7 +41,7 @@ class GroupEdit extends Component
     public function clearImage()
     {
         // Clear both the event's photo path and the form's photo path
-        $this->form->event->photo_path = null;
+        $this->form->group->photo_path = null;
         $this->form->photo_path = null;
         $this->file_upload = null;
     }

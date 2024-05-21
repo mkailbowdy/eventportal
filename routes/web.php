@@ -5,6 +5,7 @@ use App\Livewire\EventEdit;
 use App\Livewire\EventIndex;
 use App\Livewire\EventShow;
 use App\Livewire\GroupCreate;
+use App\Livewire\GroupEdit;
 use App\Livewire\GroupIndex;
 use App\Livewire\GroupShow;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,7 @@ Route::get('/events/{event}/edit', EventEdit::class)->middleware(['auth', 'role:
 Route::get('/groups', GroupIndex::class)->name('groups.index');
 Route::get('/groups/create', GroupCreate::class)->middleware(['auth', 'role:member'])->name('groups.create');
 Route::get('/groups/{group}', GroupShow::class)->name('groups.show');
+Route::get('/groups/{group}/edit', GroupEdit::class)->middleware(['auth', 'role:organizer'])->name('groups.edit');
 
 
 Route::view('dashboard', 'dashboard')
