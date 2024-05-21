@@ -36,6 +36,10 @@ new class extends Component {
                                 wire:navigate>
                         {{ __('Events') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('groups.index')" :active="request()->routeIs('groups.index')"
+                                wire:navigate>
+                        {{ __('Groups') }}
+                    </x-nav-link>
 
                     @role('member')
                     <x-nav-link :href="route('groups.create')" :active="request()->routeIs('groups.create')"
