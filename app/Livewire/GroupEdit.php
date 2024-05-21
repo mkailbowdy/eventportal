@@ -60,7 +60,7 @@ class GroupEdit extends Component
         sleep(1);
 
         $this->showSuccessIndicator = true;
-        return redirect(route('events.show', $this->form->group));
+        return redirect(route('groups.show', $this->form->group));
     }
 
     public function render()

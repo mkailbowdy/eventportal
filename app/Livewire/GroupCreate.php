@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 
 use App\Livewire\Forms\GroupForm;
+use App\Models\Group;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -14,8 +15,14 @@ class GroupCreate extends Component
     use WithFileUploads;
 
     public GroupForm $form;
+    public Group $group;
 
     public $file_upload;
+
+    public function mount()
+    {
+        $this->form->group = new Group();
+    }
 
     public function save()
     {

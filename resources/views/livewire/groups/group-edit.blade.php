@@ -72,34 +72,71 @@
 
             <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-6 sm:py-6">
                 <label for="file_upload" class="block text-sm font-medium text-gray-900">Group Main Image</label>
-                <div class="sm:col-span-2">
-                    <div class="flex items-center">
-                        <label for="file_upload"
-                               class="cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            Choose an image
-                        </label>
-                        <input type="file" wire:model="file_upload" id="file_upload" name="file_upload" class="hidden">
-                    </div>
-                    @if($form->group->photo_path)
-                        <div class="relative mt-4">
-                            <img src="{{ asset('storage/' . $form->group->photo_path) }}" alt="Event Photo"
-                                 class="w-full max-h-64 object-contain rounded-md border border-gray-300 p-2 hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                            <x-button-cancel class="absolute top-2 right-2" wire:click="clearImage"/>
+                <div x-data="{ open: false }">
+                    <input type="file"
+                           @change="open = true"
+                           wire:model="file_upload"
+                           id="file_upload" name="file_upload">
+                    <div x-show="open" class="fixed inset-0 z-10 overflow-y-auto" aria-labelledby="modal-title"
+                         role="dialog"
+                         aria-modal="true">
+                        <div
+                            class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                            <div x-show="open" @click="open = false"
+                                 class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+                                 aria-hidden="true"></div>
+
+                            <span class="hidden sm:inline-block sm:align-middle sm:h-screen"
+                                  aria-hidden="true">&#8203;</span>
+
+                            <div x-show="open"
+                                 class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+                                <div class="sm:col-span-2">
+                                    @if ($file_upload)
+                                        <div class="relative mt-4">
+                                            <img src="{{ $file_upload->temporaryUrl() }}"
+                                                 alt="Temporary Event Photo"
+                                                 class="w-full max-h-fit object-contain rounded-md border border-gray-300 p-2 hover:shadow-lg transition-shadow duration-300 ease-in-out">
+                                            <x-button-cancel class="absolute top-2 right-2"
+                                                             wire:click="clearImage()"/>
+                                        </div>
+                                    @endif
+                                    @error('file_upload')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="mt-5 sm:mt-6 flex justify-between">
+                                    <button @click="open = false"
+                                            type="button"
+                                            class="inline-flex justify-center w-1/2 rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-500 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm mr-2"
+                                            wire:click="clearImage()">
+                                        Cancel
+                                    </button>
+                                    <button @click="open = false"
+                                            type="button"
+                                            class="inline-flex justify-center w-1/2 rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
+                                        Keep
+                                    </button>
+                                </div>
+                                @error('file_upload')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
-                    @endif
+                    </div>
                     @if ($file_upload)
                         <div class="relative mt-4">
-                            <p><strong>Hit the save if you like your new pic!</strong></p>
-                            <div class="relative mt-4">
-                                <img src="{{ $file_upload->temporaryUrl() }}" alt="Event Photo"
-                                     class="w-full max-h-64 object-contain rounded-md border border-gray-300 p-2 hover:shadow-lg transition-shadow duration-300 ease-in-out">
-                                <x-button-cancel class="absolute top-2 right-2" wire:click="cancelImage()"/>
-                            </div>
+                            <img src="{{ $file_upload->temporaryUrl() }}"
+                                 alt="Temporary Event Photo"
+                                 class="w-full max-h-64 object-contain rounded-md border border-gray-300 p-2 hover:shadow-lg transition-shadow duration-300 ease-in-out">
+                            <x-button-cancel class="absolute top-2 right-2"
+                                             wire:click="clearImage()"/>
                         </div>
                     @endif
                     @error('file_upload')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
+
                 </div>
             </div>
         </div>
