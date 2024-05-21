@@ -140,7 +140,6 @@
 
                 <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-6 sm:py-6">
                     <label for="file_upload" class="block text-sm font-medium text-gray-900">Event Main Image</label>
-
                     <div x-data="{ open: false }">
                         <input type="file"
                                @change="open = true"
@@ -175,12 +174,12 @@
                                     </div>
                                     <div class="mt-5 sm:mt-6 flex justify-between">
                                         <button @click="open = false"
-                                                class="inline-flex justify-center w-1/2 rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-500 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm mr-2"
+                                                class="inline-flex justify-center w-1/2 rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-500 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm mr-2"
                                                 wire:click="clearImage()">
                                             Cancel
                                         </button>
                                         <button @click="open = false"
-                                                class="inline-flex justify-center w-1/2 rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
+                                                class="inline-flex justify-center w-1/2 rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm">
                                             Keep
                                         </button>
                                     </div>
@@ -192,6 +191,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
                 @if ($file_upload)
                     <div class="relative mt-4">
