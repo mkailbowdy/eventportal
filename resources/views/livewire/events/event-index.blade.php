@@ -78,6 +78,7 @@
                 <nav class="-mb-px flex space-x-8" aria-label="Tabs">
                     <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
                     <a href="#"
+                       wire:click="tabChanged"
                        @click.prevent="selectedTab = 'All'"
                        :class="{'border-indigo-500 text-indigo-600' : selectedTab === 'All', 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' : selectedTab !== 'All'}"
                        class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 group inline-flex items-center border-b-2 py-4 px-1 text-sm font-medium">
@@ -92,6 +93,7 @@
                         <span>All</span>
                     </a>
                     <a href="#"
+                       wire:click="tabChanged"
                        @click.prevent="selectedTab = 'Language Exchange'"
                        :class="{'border-indigo-500 text-indigo-600' : selectedTab === 'Language Exchange', 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' : selectedTab !== 'Language Exchange'}"
                        class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 group inline-flex items-center border-b-2 py-4 px-1 text-sm font-medium">
@@ -106,6 +108,7 @@
                         <span>Language Exchange</span>
                     </a>
                     <a href="#"
+                       wire:click="tabChanged"
                        @click.prevent="selectedTab = 'Outdoor'"
                        :class="{'border-indigo-500 text-indigo-600' : selectedTab === 'Outdoor', 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' : selectedTab !== 'Outdoor'}"
                        class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 group inline-flex items-center border-b-2 py-4 px-1 text-sm font-medium">
@@ -120,6 +123,8 @@
                         <span>Outdoor</span>
                     </a>
                     <a href="#"
+                       wire:click="tabChanged"
+
                        @click.prevent="selectedTab = 'Social'"
                        :class="{'border-indigo-500 text-indigo-600' : selectedTab === 'Social', 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' : selectedTab !== 'Social'}"
                        class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 group inline-flex items-center border-b-2 py-4 px-1 text-sm font-medium">
@@ -134,6 +139,7 @@
                         <span>Social</span>
                     </a>
                     <a href="#"
+                       wire:click="tabChanged"
                        @click.prevent="selectedTab = 'Sports'"
                        :class="{'border-indigo-500 text-indigo-600' : selectedTab === 'Sports', 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' : selectedTab !== 'Sports'}"
                        class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 group inline-flex items-center border-b-2 py-4 px-1 text-sm font-medium">
@@ -148,6 +154,7 @@
                         <span>Sports</span>
                     </a>
                     <a href="#"
+                       wire:click="tabChanged"
                        @click.prevent="selectedTab = 'Exercise'"
                        :class="{'border-indigo-500 text-indigo-600' : selectedTab === 'Exercise', 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700' : selectedTab !== 'Exercise'}"
                        class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 group inline-flex items-center border-b-2 py-4 px-1 text-sm font-medium">

@@ -12,6 +12,12 @@ class EventIndex extends Component
 {
     use WithPagination;
 
+    public function tabChanged()
+    {
+        $this->resetPage();
+    }
+
+
     public function render()
     {
         $events = Event::with('group')->orderBy('event_date', 'ASC')->orderBy('start_time', 'ASC')->paginate(10);
