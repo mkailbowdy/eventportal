@@ -20,29 +20,10 @@ class EventIndex extends Component
     public function render()
     {
         $events = Event::with('group')->orderBy('event_date', 'ASC')->orderBy('start_time', 'ASC')->paginate(8);
-        $leEvents = Event::with('group')
-            ->where('category_id', 1)
-            ->orderBy('event_date', 'ASC')
-            ->orderBy('start_time', 'ASC')
-            ->paginate(8);
-        $outdoorEvents = Event::with('group')->where('category_id', 2)->orderBy('event_date',
-            'ASC')->orderBy('start_time', 'ASC')->paginate(8);
-        $socialEvents = Event::with('group')->where('category_id', 3)->orderBy('event_date',
-            'ASC')->orderBy('start_time', 'ASC')->paginate(8);
-        $sportsEvents = Event::with('group')->where('category_id', 4)->orderBy('event_date',
-            'ASC')->orderBy('start_time', 'ASC')->paginate(8);
-        $exerciseEvents = Event::with('group')->where('category_id', 5)->orderBy('event_date',
-            'ASC')->orderBy('start_time', 'ASC')->paginate(8);
-
 
         // We're passing to the view a variable called $events which contains an Event model that includes all records.
         return view('livewire.events.event-index', [
             'events' => $events,
-            'leEvents' => $leEvents,
-            'outdoorEvents' => $outdoorEvents,
-            'socialEvents' => $socialEvents,
-            'sportsEvents' => $sportsEvents,
-            'exerciseEvents' => $exerciseEvents
         ]);
     }
 }
