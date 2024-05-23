@@ -169,20 +169,14 @@
         <div class="mt-6">
             <div x-show="selectedTab === 'All'" class="tab-content">
                 <h2 class="text-xl font-bold mb-4">All Upcoming Events</h2>
-                @php
-                    $filteredEvents = $events->filter(function($value){
-                         return Carbon::parse($value->end_date) < now();
-                    })->sortBy('start_time')->sortBy('event_date');
-                @endphp
                 <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                    @foreach($filteredEvents as $filteredEvent)
-                        <li wire:key="{{$filteredEvent->id}}"
+                    @foreach($events as $event)
+                        <li wire:key="{{$event->id}}"
                             class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
                             <div class="flex flex-1 flex-col p-8">
-                                <a href="/events/{{$filteredEvent->id}}">
-                                    @if ($filteredEvent->photo_path)
-                                        <img src="{{ asset('storage/' . $filteredEvent->photo_path) }}"
-                                             alt="Event Photo"
+                                <a href="/events/{{$event->id}}">
+                                    @if ($event->photo_path)
+                                        <img src="{{ asset('storage/' . $event->photo_path) }}" alt="Event Photo"
                                              class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                                     @else
                                         <img src="{{ asset('storage/' . 'photos/placeholder_image.png' ) }}"
@@ -190,18 +184,18 @@
                                              class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                                     @endif
                                 </a>
-                                <h3 class="mt-2 font-medium text-gray-900">{{$filteredEvent->title}}</h3>
+                                <h3 class="mt-2 font-medium text-gray-900">{{$event->title}}</h3>
                                 <dl class="mt-2 flex flex-grow flex-col justify-between">
                                     <dt class="sr-only">Name</dt>
-                                    <dd class="text-sm text-gray-500">{{$filteredEvent->group->name}}</dd>
+                                    <dd class="text-sm text-gray-500">{{$event->group->name}}</dd>
                                     <dt class="sr-only">Participants</dt>
                                     <dd class="mt-2">
                             <span
-                                class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-lg font-medium text-green-700 ring-1 ring-inset ring-green-600/20">People Going: {{$filteredEvent->participants}}</span>
+                                class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-lg font-medium text-green-700 ring-1 ring-inset ring-green-600/20">People Going: {{$event->participants}}</span>
                                     </dd>
                                     <dt class="sr-only">Date</dt>
-                                    <dd class="mt-2">{{ $filteredEvent->event_date->format('D, M j') }}
-                                        @ {{ $filteredEvent->start_time->format('H:i') }}</dd>
+                                    <dd class="mt-2">{{ $event->event_date->format('D, M j') }}
+                                        @ {{ $event->start_time->format('H:i') }}</dd>
                                     <dt class="sr-only">Date</dt>
                                     <dd></dd>
                                 </dl>
@@ -209,87 +203,9 @@
                         </li>
                     @endforeach
                 </ul>
-            </div>
-            <div x-show="selectedTab === 'Language Exchange'" class="tab-content">
-                <h2 class="text-xl font-bold mb-4">Language Exchange</h2>
-                @php
-                    $filteredEvents = $events->filter(function($value){
-                         return Carbon::parse($value->end_date) < now() && $value->category_id === 1;
-                    })->sortBy('start_time')->sortBy('event_date');
-                @endphp
-                <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                    @foreach($filteredEvents as $filteredEvent)
-                        <li wire:key="{{$filteredEvent->id}}"
-                            class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
-                            <div class="flex flex-1 flex-col p-8">
-                                <a href="/events/{{$filteredEvent->id}}">
-                                    @if ($filteredEvent->photo_path)
-                                        <img src="{{ asset('storage/' . $filteredEvent->photo_path) }}"
-                                             alt="Event Photo"
-                                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-                                    @else
-                                        <img src="{{ asset('storage/' . 'photos/placeholder_image.png' ) }}"
-                                             alt="Event Photo"
-                                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-                                    @endif
-                                </a>
-                                <h3 class="mt-2 font-medium text-gray-900">{{$filteredEvent->title}}</h3>
-                                <dl class="mt-2 flex flex-grow flex-col justify-between">
-                                    <dt class="sr-only">Name</dt>
-                                    <dd class="text-sm text-gray-500">{{$filteredEvent->group->name}}</dd>
-                                    <dt class="sr-only">Participants</dt>
-                                    <dd class="mt-2">
-                            <span
-                                class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-lg font-medium text-green-700 ring-1 ring-inset ring-green-600/20">People Going: {{$filteredEvent->participants}}</span>
-                                    </dd>
-                                    <dt class="sr-only">Date</dt>
-                                    <dd class="mt-2">{{ $filteredEvent->event_date->format('D, M j') }}
-                                        @ {{ $filteredEvent->start_time->format('H:i') }}</dd>
-                                    <dt class="sr-only">Date</dt>
-                                    <dd></dd>
-                                </dl>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
+                {{$events->links()}}
             </div>
         </div>
     </div>
 </div>
-</div>
 
-{{--<ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">--}}
-{{--    @foreach($events as $event)--}}
-{{--        <li wire:key="{{$event->id}}"--}}
-{{--            class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">--}}
-{{--            <div class="flex flex-1 flex-col p-8">--}}
-{{--                <a href="/events/{{$event->id}}">--}}
-{{--                    @if ($event->photo_path)--}}
-{{--                        <img src="{{ asset('storage/' . $event->photo_path) }}" alt="Event Photo"--}}
-{{--                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">--}}
-{{--                    @else--}}
-{{--                        <img src="{{ asset('storage/' . 'photos/placeholder_image.png' ) }}"--}}
-{{--                             alt="Event Photo" class="h-full w-full object-cover object-center lg:h-full lg:w-full">--}}
-{{--                    @endif--}}
-{{--                </a>--}}
-{{--                <h3 class="mt-2 font-medium text-gray-900">{{$event->title}}</h3>--}}
-{{--                <dl class="mt-2 flex flex-grow flex-col justify-between">--}}
-{{--                    <dt class="sr-only">Name</dt>--}}
-{{--                    <dd class="text-sm text-gray-500">{{$event->group->name}}</dd>--}}
-{{--                    <dt class="sr-only">Participants</dt>--}}
-{{--                    <dd class="mt-2">--}}
-{{--                            <span--}}
-{{--                                class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-lg font-medium text-green-700 ring-1 ring-inset ring-green-600/20">People Going: {{$event->participants}}</span>--}}
-{{--                    </dd>--}}
-{{--                    <dt class="sr-only">Date</dt>--}}
-{{--                    <dd class="mt-2">{{ $event->event_date->format('D, M j') }}--}}
-{{--                        @ {{ $event->start_time->format('H:i') }}</dd>--}}
-{{--                    <dt class="sr-only">Date</dt>--}}
-{{--                    <dd></dd>--}}
-{{--                </dl>--}}
-{{--            </div>--}}
-{{--        </li>--}}
-{{--    @endforeach--}}
-{{--</ul>--}}
-{{--{{$events->links()}}--}}
-{{--</div>--}}

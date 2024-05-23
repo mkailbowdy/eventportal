@@ -40,6 +40,25 @@
                 </div>
             </div>
 
+            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:py-6">
+                <label for="form.category_id" class="block text-sm font-medium text-gray-900 sm:pt-2">Category <span
+                        class="text-red-500">*</span></label>
+                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                    <select wire:model="form.category_id"
+                            class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value="">Choose a category</option>
+                        <option value="1">Language Exchange</option>
+                        <option value="2">Outdoor</option>
+                        <option value="3">Social</option>
+                        <option value="4">Sports</option>
+                        <option value="5">Exercise</option>
+                    </select>
+                    @error('form.category_id')
+                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
+
             <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-3 sm:gap-x-6 sm:py-6">
                 <label for="form.location" class="block text-sm font-medium text-gray-900">Location</label>
                 <div class="sm:col-span-2">
