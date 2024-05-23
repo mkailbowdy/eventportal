@@ -1,6 +1,3 @@
-@php
-    use Carbon\Carbon;
-@endphp
 <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 py-5">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -49,15 +46,7 @@
     <!--
   This example requires some changes to your config:
 
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
+Navigation
   ```
 -->
     <div x-data="{ selectedTab: 'All' }">
