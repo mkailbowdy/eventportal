@@ -15,7 +15,6 @@ return new class extends Migration {
         Schema::create('event_user', function (Blueprint $table) {
             $table->primary(['event_id', 'user_id']);
             $table->boolean('participation_status')->default(false);
-
             $table->foreignIdFor(User::class, 'user_id');
             $table->foreignIdFor(Event::class, 'event_id');
             $table->timestamps();

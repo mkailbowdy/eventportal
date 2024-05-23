@@ -18,25 +18,19 @@ class EventFactory extends Factory
      * @return array<string, mixed>
      */
 
-
-    public function definition(): array
+    public function definition()
     {
-        // Generate a start time
-        $startTime = $this->faker->dateTimeBetween('08:00:00', '17:00:00');
-
-        // Clone the startTime DateTime object and add a random duration to it for the end time
-        $endTime = (clone $startTime)->modify('+'.rand(1, 4).' hours');
-
         return [
-            'category_id' => 1,
             'group_id' => Group::factory(),
+            'category_id' => $this->faker->numberBetween(1, 5),
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'location' => $this->faker->address,
             'event_date' => $this->faker->dateTimeBetween('+0 days', '+7 days')->format('Y-m-d'),
-            'start_time' => $startTime->format('H:i'), // Format the DateTime object to a time string
-            'end_time' => $endTime->format('H:i'),
-            'participants' => $this->faker->numberBetween(1, 30),
+            'start_time' => $this->faker->time(), // Generates only the time
+            'end_time' => $this->faker->time(),   // Generates only the time
+            'max_participants' => $this->faker->numberBetween(10, 100),
+            'participants' => $this->faker->numberBetween(0, 10),
         ];
     }
 }
