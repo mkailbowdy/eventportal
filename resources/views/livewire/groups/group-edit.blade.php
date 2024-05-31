@@ -126,9 +126,20 @@
                     </div>
                     @if ($file_upload)
                         <div class="relative mt-4">
+                            <p>New:</p>
                             <img src="{{ $file_upload->temporaryUrl() }}"
                                  alt="Temporary Event Photo"
                                  class="w-full max-h-64 object-contain rounded-md border border-gray-300 p-2 hover:shadow-lg transition-shadow duration-300 ease-in-out">
+                            <x-button-cancel class="absolute top-2 right-2"
+                                             wire:click="clearImage()"/>
+                        </div>
+                    @endif
+                    @if ($form->photo_path)
+                        <div class="relative mt-4">
+                            <p>Current:</p>
+                            <img src="{{ asset('storage/' . $form->photo_path) }}"
+                                 alt="Temporary Event Photo"
+                                 class="w-full max-h-fit object-contain rounded-md border border-gray-300 p-2 hover:shadow-lg transition-shadow duration-300 ease-in-out">
                             <x-button-cancel class="absolute top-2 right-2"
                                              wire:click="clearImage()"/>
                         </div>

@@ -18,22 +18,29 @@ class EventIndex extends Component
     public Collection $categories;
     public string $searchQuery = '';
     public int $searchCategory = 0;
+    public string $searchCity = '';
 
     public function mount(): void
     {
         $this->categories = Category::pluck('name', 'id');
     }
 
+    // updating() is a lifecycle hook. Any time the component is updated, the pagination pages is reset
     public function updating($key): void
     {
-        if ($key === 'searchQuery' || $key === 'searchCategory') {
+        if ($key === 'searchQuery' || $key === 'searchCategory' || $key === 'searchCity') {
             $this->resetPage();
         }
     }
 
     public function render()
     {
-        $events = Event::with('group')
+        $events = Event::with(['group', 'users'])
+            ->withCount([
+                'users as people_going_count' => function ($query) {
+                    $query->where('participation_status', 1);
+                }
+            ])
             ->orderBy('event_date', 'ASC')
             ->orderBy('start_time', 'ASC')
             ->when($this->searchQuery !== '',

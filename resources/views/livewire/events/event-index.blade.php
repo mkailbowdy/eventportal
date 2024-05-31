@@ -75,7 +75,7 @@
                                 <dt class="sr-only">Participants</dt>
                                 <dd class="mt-2">
                             <span
-                                class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-lg font-medium text-green-700 ring-1 ring-inset ring-green-600/20">People Going: {{$event->participants}}</span>
+                                class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-lg font-medium text-green-700 ring-1 ring-inset ring-green-600/20">People Going: {{$event->people_going_count}}</span>
                                 </dd>
                                 <dt class="sr-only">Date</dt>
                                 <dd class="mt-2">{{ $event->event_date->format('D, M j') }}
@@ -91,7 +91,5 @@
         </div>
     </div>
 
-
-</div>
 
 </div>
