@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->foreignId('category_id')->after('id');
+//            $table->foreignId('category_id')->after('id');
             $table->foreignId('group_id')->constrained()->onDelete('cascade');
 
         });
