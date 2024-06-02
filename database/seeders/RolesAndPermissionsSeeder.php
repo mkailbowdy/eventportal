@@ -33,7 +33,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $role->givePermissionTo(Permission::all());
 
         $role = Role::create(['name' => 'member']);
-        $role->givePermissionTo(['create group',]);
+        $role->givePermissionTo(['create group']);
 
         $role = Role::create(['name' => 'organizer']);
         $role->givePermissionTo(['create event', 'delete event']);
