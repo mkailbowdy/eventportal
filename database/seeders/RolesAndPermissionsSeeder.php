@@ -17,25 +17,28 @@ class RolesAndPermissionsSeeder extends Seeder
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // Create permissions
+        // Define permissions
         $permissions = [
             'create event',
             'delete event',
             'create group',
         ];
 
+        // Create permissions if they don't already exist
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            if (!Permission::where('name', $permission)->where('guard_name', 'web')->exists()) {
+                Permission::create(['name' => $permission, 'guard_name' => 'web']);
+            }
         }
 
         // Create roles and assign existing permissions
-        $role = Role::create(['name' => 'admin', 'guard_name' => 'web']);
-        $role->givePermissionTo(Permission::all());
+        $adminRole = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+        $adminRole->syncPermissions(Permission::all());
 
-        $role = Role::create(['name' => 'member', 'guard_name' => 'web']);
-        $role->givePermissionTo(['create group',]);
+        $memberRole = Role::firstOrCreate(['name' => 'member', 'guard_name' => 'web']);
+        $memberRole->syncPermissions(['create group']);
 
-        $role = Role::create(['name' => 'organizer', 'guard_name' => 'web']);
-        $role->givePermissionTo(['create event', 'delete event']);
+        $organizerRole = Role::firstOrCreate(['name' => 'organizer', 'guard_name' => 'web']);
+        $organizerRole->syncPermissions(['create event', 'delete event']);
     }
 }
