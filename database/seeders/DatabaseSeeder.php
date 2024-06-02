@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         // Call other seeders here
         $this->call([
+            RolesAndPermissionsSeeder::class,
             CategorySeeder::class,
             EventSeeder::class,
             UserSeeder::class,
-            RolesAndPermissionsSeeder::class,
         ]);
 
         // Re-enable foreign key checks after the seeding is done
