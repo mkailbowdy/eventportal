@@ -12,7 +12,14 @@ return new class extends Migration {
     {
         Schema::table('events', function (Blueprint $table) {
             $table->foreignId('category_id')->after('id');
+            $table->foreignId('group_id')->constrained()->onDelete('cascade');
+
         });
+
+        Schema::create('groups', function (Blueprint $table) {
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+        });
+
     }
 
     /**
@@ -21,6 +28,9 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('events', function (Blueprint $table) {
+            //
+        });
+        Schema::table('groups', function (Blueprint $table) {
             //
         });
     }
