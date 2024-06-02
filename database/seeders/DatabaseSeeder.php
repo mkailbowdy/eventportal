@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
             CategorySeeder::class,
             EventSeeder::class,
-            UserSeeder::class,
+//            UserSeeder::class,
         ]);
 
         // Re-enable foreign key checks after the seeding is done
