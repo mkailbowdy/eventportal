@@ -16,7 +16,7 @@ return new class extends Migration {
 
         });
 
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::table('groups', function (Blueprint $table) {
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
         });
 
