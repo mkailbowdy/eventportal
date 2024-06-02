@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->string('name')->collation('NOCASE');
+            $table->string('name');
             $table->text('description');
             $table->string('prefecture');
             $table->string('photo_path')->nullable();
