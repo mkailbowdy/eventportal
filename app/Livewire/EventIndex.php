@@ -33,7 +33,6 @@ class EventIndex extends Component
         } else {
             $transliterator = Transliterator::create('NFD; [:Nonspacing Mark:] Remove; NFC;');
             $this->searchPrefecture = $transliterator->transliterate($currentLocation->regionName);
-            dd($this->searchPrefecture);
         }
     }
 
