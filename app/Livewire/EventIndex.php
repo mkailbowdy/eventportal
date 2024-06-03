@@ -25,11 +25,14 @@ class EventIndex extends Component
     public function mount(): void
     {
         $this->categories = Category::pluck('name', 'id');
-        $this->currentLocation = Location::get();
-        if ($this->currentLocation) {
-            dd($this->currentLocation);
+        $ip = request()->ip();
+        dd($ip);
+        $this->currentLocation = Location::get($ip);
+        if (!$this->currentLocation) {
+            $this->searchCity = 'Tokyo';
         } else {
-            dd('failed to get location');
+            $this->searchCity = $this->currentLocation->city;
+            dd($this->searchCity);
         }
     }
 
