@@ -48,6 +48,9 @@
         </div>
 
         <div>
+            @if($events->isEmpty())
+                <p>No events scheduled in this prefecture :(</p>
+            @endif
             <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 @foreach($events as $event)
                     <li wire:key="{{$event->id}}"
