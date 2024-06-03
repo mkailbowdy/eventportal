@@ -20,25 +20,24 @@ class EventIndex extends Component
     public string $searchQuery = '';
     public int $searchCategory = 0;
     public string $searchPrefecture = '';
-    public $currentLocation;
 
     public function mount(): void
     {
         $this->categories = Category::pluck('name', 'id');
         $ip = request()->ip();
-        $this->currentLocation = Location::get($ip);
+        $currentLocation = Location::get($ip);
 
-        if (!$this->currentLocation) {
+        if (!$currentLocation) {
             $this->searchPrefecture = 'Tokyo';
         } else {
-            $this->searchPrefecture = $this->currentLocation->regionName;
+            $this->searchPrefecture = $currentLocation->regionName;
         }
     }
 
     // updating() is a lifecycle hook. Any time the component is updated, the pagination pages is reset
     public function updating($key): void
     {
-        if ($key === 'searchQuery' || $key === 'searchCategory' || $key === 'searchCity') {
+        if ($key === 'searchQuery' || $key === 'searchCategory' || $key === 'searchPrefecture') {
             $this->resetPage();
         }
     }
