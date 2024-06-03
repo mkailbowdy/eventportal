@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.0",
-        "spatie/laravel-permission": "^6.7"
+        "spatie/laravel-permission": "^6.7",
+        "stevebauman/location": "^7.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",

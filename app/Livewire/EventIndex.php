@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Stevebauman\Location\Facades\Location;
 
 #[Title('Events')]
 class EventIndex extends Component
@@ -19,10 +20,17 @@ class EventIndex extends Component
     public string $searchQuery = '';
     public int $searchCategory = 0;
     public string $searchCity = '';
+    public $currentLocation;
 
     public function mount(): void
     {
         $this->categories = Category::pluck('name', 'id');
+        $this->currentLocation = Location::get();
+        if ($this->currentLocation) {
+            dd($this->currentLocation);
+        } else {
+            dd('failed to get location');
+        }
     }
 
     // updating() is a lifecycle hook. Any time the component is updated, the pagination pages is reset
