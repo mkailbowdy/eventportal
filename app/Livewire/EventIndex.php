@@ -30,7 +30,7 @@ class EventIndex extends Component
         if (!$this->currentLocation) {
             $this->searchCity = 'Tokyo';
         } else {
-            $this->searchCity = $this->currentLocation->city;
+            $this->searchCity = $this->currentLocation->cityName;
             dd($this->searchCity);
         }
     }
