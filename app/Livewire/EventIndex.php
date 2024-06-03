@@ -30,8 +30,8 @@ class EventIndex extends Component
         if (!$currentLocation) {
             $this->searchPrefecture = 'Tokyo';
         } else {
-            $this->searchPrefecture = $currentLocation->regionName;
-            dd($this->searchPrefecture);
+            $this->searchPrefecture = mb_convert_encoding($currentLocation->regionName, 'ASCII', 'UTF-8');
+//            dd($this->searchPrefecture);
         }
     }
 
