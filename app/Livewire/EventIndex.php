@@ -19,7 +19,7 @@ class EventIndex extends Component
     public Collection $categories;
     public string $searchQuery = '';
     public int $searchCategory = 0;
-    public string $searchCity = '';
+    public string $searchPrefecture = '';
     public $currentLocation;
 
     public function mount(): void
@@ -27,11 +27,12 @@ class EventIndex extends Component
         $this->categories = Category::pluck('name', 'id');
         $ip = request()->ip();
         $this->currentLocation = Location::get($ip);
+
         if (!$this->currentLocation) {
-            $this->searchCity = 'Tokyo';
+            $this->searchPrefecture = 'Tokyo';
         } else {
-            $this->searchCity = $this->currentLocation->cityName;
-            dd($this->searchCity);
+            $this->searchPrefecture = $this->currentLocation->regionName;
+            dd($this->searchPrefecture);
         }
     }
 
@@ -56,6 +57,9 @@ class EventIndex extends Component
             ->when($this->searchQuery !== '',
                 fn(Builder $query) => $query->where('title', 'like', '%'.$this->searchQuery.'%'))
             ->when($this->searchCategory > 0, fn(Builder $query) => $query->where('category_id', $this->searchCategory))
+            ->whereHas('group', function ($query) {
+                $query->where('prefecture', $this->searchPrefecture);
+            })
             ->paginate(8);
 
 

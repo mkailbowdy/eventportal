@@ -45,6 +45,13 @@
     <div class="mt-6">
         <input wire:model.live="searchQuery" type="search" id="search" placeholder="Search...">
 
+        <select wire:model.live="searchPrefecture" name="prefecture">
+            <option value="0">Choose a prefecture</option>
+            @foreach(App\Enums\Prefecture::cases() as $prefecture)
+                <option value="{{$prefecture->value}}">{{$prefecture->label()}}</option>
+            @endforeach
+        </select>
+
         <select wire:model.live="searchCategory" name="category">
             <option value="0">Choose category</option>
             @foreach($categories as $id => $category)
