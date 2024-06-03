@@ -31,6 +31,7 @@ class EventIndex extends Component
             $this->searchPrefecture = 'Tokyo';
         } else {
             $this->searchPrefecture = $currentLocation->regionName;
+            dd($this->searchPrefecture);
         }
     }
 
