@@ -18,7 +18,7 @@ class EventIndex extends Component
     use WithPagination;
 
     public Collection $categories;
-    public string $searchQuery = '';
+//    public string $searchQuery = '';
     public int $searchCategory = 0;
     public string $searchPrefecture = '';
 
@@ -54,8 +54,8 @@ class EventIndex extends Component
             ])
             ->orderBy('event_date', 'ASC')
             ->orderBy('start_time', 'ASC')
-            ->when($this->searchQuery !== '',
-                fn(Builder $query) => $query->where('title', 'like', '%'.$this->searchQuery.'%'))
+//            ->when($this->searchQuery !== '',
+//                fn(Builder $query) => $query->where('title', 'like', '%'.$this->searchQuery.'%'))
             ->when($this->searchCategory > 0, fn(Builder $query) => $query->where('category_id', $this->searchCategory))
             ->whereHas('group', function ($query) {
                 $query->where('prefecture', $this->searchPrefecture);

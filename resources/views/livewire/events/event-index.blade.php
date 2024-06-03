@@ -1,4 +1,4 @@
-<div class="mx-auto max-w-7xl sm:px-6 lg:px-8 pb-64">
+<div class="mx-auto max-w-7xl px-6 lg:px-8 pb-64">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Please read the community guidelines before participating in events!') }}
@@ -31,8 +31,8 @@
             <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Events in
                 <span class="text-indigo-500">{{$searchPrefecture}}</span></h2>
         </div>
-        <div class="py-3">
-            <input wire:model.live="searchQuery" type="search" id="search" placeholder="Search...">
+        <div class="py-6">
+            {{--            <input wire:model.live="searchQuery" type="search" id="search" placeholder="Search...">--}}
             <select wire:model.live="searchPrefecture" name="prefecture">
                 <option value="Japan">Choose a prefecture</option>
                 @foreach(App\Enums\Prefecture::cases() as $prefecture)
@@ -51,11 +51,11 @@
             @if($events->isEmpty())
                 <p>No events scheduled in this prefecture :(</p>
             @endif
-            <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <ul role="list" class="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 @foreach($events as $event)
                     <li wire:key="{{$event->id}}"
                         class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
-                        <div class="flex flex-1 flex-col p-8">
+                        <div class="flex flex-1 flex-col p-4">
                             <a href="/events/{{$event->id}}">
                                 @if ($event->photo_path)
                                     <img src="{{ asset('storage/' . $event->photo_path) }}" alt="Event Photo"
