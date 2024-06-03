@@ -1,7 +1,7 @@
 <x-base-layout>
-    <div class="bg-white">
-        <div class="bg-white">
-            <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
+    <div class="bg-white pb-64">
+        <div>
+            <div class="mx-auto max-w-7xl px-6 py-24 sm:py-12 lg:px-8">
                 <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Find events and friends near
                     you!</h2>
                 <p>Meet like-minded individuals and make new experiences in Japan.</p>
@@ -12,8 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="container mx-auto px-4 py-6 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Events in your area</h2>
+        <div>
             <livewire:event-index/>
         </div>
     </div>
