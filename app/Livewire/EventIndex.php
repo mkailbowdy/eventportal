@@ -10,6 +10,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Stevebauman\Location\Facades\Location;
+use Transliterator;
 
 #[Title('Events')]
 class EventIndex extends Component
@@ -30,7 +31,8 @@ class EventIndex extends Component
         if (!$currentLocation) {
             $this->searchPrefecture = 'Tokyo';
         } else {
-            $this->searchPrefecture = mb_convert_encoding($currentLocation->regionName, 'ASCII', 'UTF-8');
+            $transliterator = Transliterator::create('NFD; [:Nonspacing Mark:] Remove; NFC;');
+            $this->searchPrefecture = $transliterator->transliterate($currentLocation->regionName);
             dd($this->searchPrefecture);
         }
     }
