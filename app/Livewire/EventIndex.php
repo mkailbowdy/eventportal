@@ -26,7 +26,6 @@ class EventIndex extends Component
     {
         $this->categories = Category::pluck('name', 'id');
         $ip = request()->ip();
-        dd($ip);
         $this->currentLocation = Location::get($ip);
         if (!$this->currentLocation) {
             $this->searchCity = 'Tokyo';
