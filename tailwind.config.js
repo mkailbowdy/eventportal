@@ -21,7 +21,7 @@ export default {
     plugins: [
         forms,
         aspectRatio,
-
+        require('@tailwindcss/line-clamp'),
     ],
 
 
