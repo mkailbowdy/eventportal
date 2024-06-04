@@ -28,7 +28,7 @@ class EventIndex extends Component
         $ip = request()->ip();
         $currentLocation = Location::get($ip);
 
-        if (!$currentLocation) {
+        if (!$currentLocation || $currentLocation->countryName !== 'Japan') {
             $this->searchPrefecture = 'Tokyo';
         } else {
             $transliterator = Transliterator::create('NFD; [:Nonspacing Mark:] Remove; NFC;');
