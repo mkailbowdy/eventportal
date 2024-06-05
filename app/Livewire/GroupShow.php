@@ -15,7 +15,7 @@ class GroupShow extends Component
     public function mount(Group $group)
     {
         $this->group = $group;
-        $this->events = $group->events()->get();
+        $this->events = $group->events()->orderBy('event_date', 'asc')->orderBy('start_time', 'desc')->get();
         $this->members = $group->users()->get();
     }
 
