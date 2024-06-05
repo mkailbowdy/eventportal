@@ -1,9 +1,11 @@
 <div class="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 py-5">
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('All Groups') }}
-        </h2>
-    </x-slot>
+    <div class="sm:flex sm:items-center">
+        <div class="py-3">
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Groups in
+                <span class="text-indigo-500">{{$searchPrefecture}}</span>
+            </h2>
+        </div>
+    </div>
     <div class="flex justify-center items-baseline">
         {{--        <div>--}}
         {{--            @if (session()->has('status'))--}}

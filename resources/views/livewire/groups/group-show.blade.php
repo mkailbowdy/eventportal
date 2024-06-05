@@ -78,23 +78,19 @@
                 <div x-show="selectedTab === 'Members'" class="tab-content">
                     <h2 class="text-xl font-bold mb-4">Members ({{$members->count()}})</h2>
                     <!-- members list -->
-                    <ul role="list" class="flex">
+                    <ul role="list" class=" justify-center">
                         @foreach($members as $member)
-                            <li wire:key="{{$member->id}}"
-                                class="p-1 rounded-lg text-center">
-                                <div class="">
-                                    <h3 class="">{{$member->name}}</h3>
-
-                                    <a href="">
-                                        @if ($member->photo_path)
-                                            <img src="{{ asset('storage/' . $member->photo_path) }}" alt="Event Photo"
-                                                 class="mx-auto rounded-full object-cover min-w-[128px] border border-gray2 h-24 w-24 overflow-hidden">
-                                        @else
-                                            <img src="{{ asset('storage/' . 'photos/placeholder_image.png' ) }}"
-                                                 alt="Event Photo"
-                                                 class="rounded-full object-cover min-w-[128px] border border-gray2 h-24 w-24 overflow-hidden">
-                                        @endif
-                                    </a>
+                            <li wire:key="{{$member->id}}" class="rounded-lg">
+                                <div class="flex items-center gap-2 py-1">
+                                    @if ($member->photo_path)
+                                        <img src="{{ asset('storage/' . $member->photo_path) }}" alt="Event Photo"
+                                             class="rounded-full object-cover min-w-[128px] border border-gray2 h-24 w-24 overflow-hidden">
+                                    @else
+                                        <img src="{{ asset('storage/' . 'photos/placeholder_image.png' ) }}"
+                                             alt="Event Photo"
+                                             class="rounded-full object-cover min-w-[128px] border border-gray2 h-24 w-24 overflow-hidden">
+                                    @endif
+                                    <span class=""><small>{{$member->name}}</small></span>
                                 </div>
                             </li>
                         @endforeach

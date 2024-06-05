@@ -1,4 +1,4 @@
-<div class="px-4 sm:px-6 lg:px-8">
+<div class="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 py-5">
     <div class="sm:flex sm:items-center">
         <div class="py-3">
             <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Events in

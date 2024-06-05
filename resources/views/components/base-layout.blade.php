@@ -31,6 +31,7 @@
         </div>
     </main>
 </div>
+<x-layouts.footer/>
 </body>
 </html>
 
