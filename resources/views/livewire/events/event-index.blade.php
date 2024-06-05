@@ -35,10 +35,17 @@
             <div class="flex flex-row py-3">
                 <div class="flex-shrink-0">
                     <a href="{{route('events.show', ['event' => $event->id])}}">
-                        <img class="h-24 w-24 rounded-md object-cover"
-                             src="{{asset('storage/' . $event->photo_path)}}"
-                             alt="">
+                        @if($event->photo_path)
+                            <img class="h-24 w-24 rounded-md object-cover"
+                                 src="{{asset('storage/' . $event->photo_path)}}"
+                                 alt="">
+                        @else
+                            <img class="h-24 w-24 rounded-md object-cover"
+                                 src="{{asset('storage/' . 'photos/placeholder_image.png' )}}"
+                                 alt="">
+                        @endif
                     </a>
+
                 </div>
                 <div class="flex-col ml-6">
                     <div><a
