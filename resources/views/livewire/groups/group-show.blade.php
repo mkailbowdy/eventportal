@@ -14,8 +14,8 @@
                 class="text-base font-semibold leading-7 text-gray-600">{{$group->category()->first()->name}}
                 in</small>
             <p class="text-base font-semibold leading-7 text-indigo-600">{{$group->prefecture}} Prefecture</p>
-            <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{$group->name}}</h1>
-            <p class="mt-6 text-xl leading-8 text-gray-700">{{$group->description}}</p>
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{$group->name}}</h1>
+            <p class="text-xl leading-8 text-gray-700">{{$group->description}}</p>
         </div>
 
         <div x-data="{ selectedTab: 'Upcoming Events' }">
@@ -78,21 +78,21 @@
                 <div x-show="selectedTab === 'Members'" class="tab-content">
                     <h2 class="text-xl font-bold mb-4">Members ({{$members->count()}})</h2>
                     <!-- members list -->
-                    <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    <ul role="list" class="flex">
                         @foreach($members as $member)
                             <li wire:key="{{$member->id}}"
-                                class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center">
-                                <div class="flex flex-1 flex-col p-8">
-                                    <h3 class="mt-6 text-sm font-medium text-gray-900">{{$member->name}}</h3>
+                                class="p-1 rounded-lg text-center">
+                                <div class="">
+                                    <h3 class="">{{$member->name}}</h3>
 
                                     <a href="">
                                         @if ($member->photo_path)
                                             <img src="{{ asset('storage/' . $member->photo_path) }}" alt="Event Photo"
-                                                 class="mx-auto rounded-full object-cover min-w-[128px] border border-gray2 h-32 w-32">
+                                                 class="mx-auto rounded-full object-cover min-w-[128px] border border-gray2 h-24 w-24 overflow-hidden">
                                         @else
                                             <img src="{{ asset('storage/' . 'photos/placeholder_image.png' ) }}"
                                                  alt="Event Photo"
-                                                 class="rounded-full object-cover min-w-[128px] border border-gray2 h-32 w-32">
+                                                 class="rounded-full object-cover min-w-[128px] border border-gray2 h-24 w-24 overflow-hidden">
                                         @endif
                                     </a>
                                 </div>
