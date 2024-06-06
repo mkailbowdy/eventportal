@@ -45,7 +45,7 @@
         <ul role="list" class="grid grid-cols-2 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             @foreach($groups as $group)
                 <li wire:key="{{$group->id}}"
-                    class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow">
+                    class="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center">
                     <div class="flex flex-1 flex-col p-8">
                         <a href="/groups/{{$group->id}}">
                             @if ($group->photo_path)
@@ -58,17 +58,17 @@
                             @endif
                         </a>
                         <h3 class="mt-2 font-medium text-gray-900">{{$group->name}}</h3>
-                        <small>Organized by
-                            @if ($group->users()->wherePivot('role', 'organizer')->first())
-                                {{$group->users()->wherePivot('role', 'organizer')->first()->name}}
+                        <p>
+                            @if ($group->users())
+                                {{$group->users()->count()}} Members
                             @else
-                                {{'No One'}}
+                                0
                             @endif
-                        </small>
-                        <dl class="mt-2 flex flex-grow flex-col justify-between">
-                            <dt class="sr-only">Description</dt>
-                            <dd class="text-sm text-gray-500 line-clamp-3">{{ $group->description }}</dd>
-                        </dl>
+                        </p>
+                        {{--                        <dl class="mt-2 flex flex-grow flex-col justify-between">--}}
+                        {{--                            <dt class="sr-only">Description</dt>--}}
+                        {{--                            <dd class="text-sm text-gray-500 line-clamp-3">{{ $group->description }}</dd>--}}
+                        {{--                        </dl>--}}
                     </div>
                 </li>
             @endforeach
