@@ -12,14 +12,18 @@ async function initMap() {
 
     // Initialize the map.
     map = new google.maps.Map(document.getElementById("map"), {
-        center: {lat: 40.749933, lng: -73.98633},
-        zoom: 13,
+        center: {lat: 35.6764, lng: 139.6500},
+        zoom: 6,
         mapId: "4504f8b37365c3d0",
         mapTypeControl: false,
     });
 
     //@ts-ignore
-    const placeAutocomplete = new google.maps.places.PlaceAutocompleteElement();
+    const placeAutocomplete = new google.maps.places.PlaceAutocompleteElement({
+        componentRestrictions: {country: ['jp']},
+        locationRestriction: map.getBounds(),
+    });
+
 
     //@ts-ignore
     placeAutocomplete.id = "place-autocomplete-input";
@@ -60,6 +64,11 @@ async function initMap() {
 
         updateInfoWindow(content, place.location);
         marker.position = place.location;
+    });
+
+    // Add listener to update bounds when they change
+    map.addListener('bounds_changed', () => {
+        placeAutocomplete.locationRestriction = map.getBounds();
     });
 }
 
