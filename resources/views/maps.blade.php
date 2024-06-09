@@ -31,6 +31,6 @@
             }));
         d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))
     })
-    ({key: "AIzaSyDCKKTR39LtZK8Xm0W7crpRUnI3W_pLFo0", v: "beta"});</script>
+    ({key: "{{env('GOOGLE_MAPS_API_KEY')}}", v: "beta"});</script>
 </body>
 </html>
