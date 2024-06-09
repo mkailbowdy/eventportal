@@ -22,6 +22,7 @@ Route::get('/groups/create', GroupCreate::class)->middleware(['auth', 'role:memb
 Route::get('/groups/{group}', GroupShow::class)->name('groups.show');
 Route::get('/groups/{group}/edit', GroupEdit::class)->middleware(['auth', 'role:organizer'])->name('groups.edit');
 
+Route::view('/maps', 'maps');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
