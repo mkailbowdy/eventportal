@@ -1,8 +1,3 @@
-/**
- * @license
- * Copyright 2019 Google LLC. All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
- */
 /*
  * Always set the map height explicitly to define the size of the div element
  * that contains the map.
@@ -21,8 +16,25 @@ body {
     padding: 0;
 }
 
-p {
+#place-autocomplete-card {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin: 10px;
+    padding: 5px;
     font-family: Roboto, sans-serif;
+    font-size: large;
     font-weight: bold;
 }
 
+gmp-place-autocomplete {
+    width: 300px;
+}
+
+#infowindow-content .title {
+    font-weight: bold;
+}
+
+#map #infowindow-content {
+    display: inline;
+}
