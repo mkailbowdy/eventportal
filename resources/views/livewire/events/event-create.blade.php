@@ -6,6 +6,7 @@
             {{ __('Create Event') }}
         </h2>
     </x-slot>
+
     <form id="create" wire:submit.prevent="save" class="space-y-12">
         @csrf
         <div>
@@ -83,11 +84,21 @@
                         <input type="text" name="form.location" id="form.location" autocomplete="form.location"
                                wire:model.blur="form.location"
                                class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <p class="mt-2 text-sm text-gray-600">Enter the address of the meetup spot. Don't know the
+                            address? Find the place using the map below, then copy and paste the address!</p>
                         @error('form.location')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
+                        <div class="mt-6">
+
+                            <livewire:map-component/>
+
+                        </div>
+
                     </div>
+
                 </div>
+
 
                 <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:py-6">
                     <label for="form.max_participants"
@@ -223,5 +234,6 @@
             </div>
         </div>
     </form>
+
 </div>
 

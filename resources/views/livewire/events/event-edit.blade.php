@@ -68,6 +68,11 @@
                     @error('form.location')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
+                    <div class="mt-6">
+
+                        <livewire:map-component/>
+
+                    </div>
                 </div>
             </div>
 
